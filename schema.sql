@@ -5,23 +5,29 @@
     is_admin BOOLEAN
   );
 
+
   CREATE TABLE Albums (
     id SERIAL PRIMARY KEY,
-    added DATE,
+    user_id INTEGER REFERENCES Users,
+    date_added DATE,
     artist TEXT,
     album_name TEXT,
     release_year INTEGER,
     genre TEXT,
+    editable BOOLEAN,
     visible BOOLEAN
   );
+
 
   CREATE TABLE Songs (
     id SERIAL PRIMARY KEY,
     song_name TEXT,
-    song_length TIME,
+    song_len_min INTEGER,
+    song_len_sec INTEGER,
     album_id INTEGER REFERENCES Albums,
     visible BOOLEAN
   );
+
 
   CREATE TABLE Images (
     id SERIAL PRIMARY KEY,
@@ -30,14 +36,16 @@
     visible BOOLEAN
   );
 
+
   CREATE TABLE Review (
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES Users,
     album_id INTEGER REFERENCES Albums,
     comment TEXT,
-    points INTEGER,
+    grade INTEGER,
     visible BOOLEAN
   );
+
 
   CREATE TABLE Thumbs (
     id SERIAL PRIMARY KEY,
