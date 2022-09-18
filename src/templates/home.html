@@ -1,17 +1,32 @@
 <!DOCTYPE html>
 <head>
   <meta charset="utf-8">
-  <title>Home</title>
+  <title>Levyraati</title>
 </head>  
 
 <body>
   {% if session.user_id %}
-    <a href="/logout">Logout</a>
-    <a href="/addalbum">Add a new album and review</a>
+    <b> Logged in as {{ session.username }}</b><br>
+    <a href="/logout">Logout</a><br>
+    <a href="/addalbum">Add a new album and review</a><br>
   {% else %}
     <a href="/login">Login</a><br>
-    <a href="/register">Register</a>
+    <a href="/register">Register</a><br>
   {% endif %}
+  <a href="/album">Browse albums and reviews</a>
 
-  <h1>Welcome to index</h1>
+  <h1>Welcome to Levyraati</h1>
+  <h3>New reviews</h3>
+  {% for album in albums %}
+    <a>Image would go here</a><br>
+    <a href="/artist/"{{ album.artist }}>{{ album.artist }}</a><br>
+    <a>{{ album.album_name }}</a><br>
+    <a>{{ album.username }}</a><br>
+    <i>{{ album.date_added.strftime("%Y-%m-%d %H:%M") }}</i><br><br>
+  {% endfor %}
+
+
+
+
+  
 </body>

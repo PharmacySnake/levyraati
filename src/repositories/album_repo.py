@@ -1,7 +1,7 @@
 from datetime import datetime
 from db import db
 import services.user_serv as user_serv
-from repositories import image_repo, song_repo
+from repositories import image_repo, review_repo, song_repo
 
 
 def add_album(artist:str, album_name:str, release_year:int, genre:str, comment:str,
@@ -28,7 +28,99 @@ def add_album(artist:str, album_name:str, release_year:int, genre:str, comment:s
       image_repo.add_cover_image(cover_image, album_id)
     if len(songs) > 0:
       song_repo.add_songs(songs, songs_length, album_id)
+    review_repo.add_review(comment, grade, user_id, album_id)
     return True
+
+#poistetaan jos turha
+def display_albums_home():
+  sql = "SELECT U.username, A.artist, A.album_name, A.date_added, R.comment, R.grade " \
+        "FROM albums A, users U, reviews R " \
+        "WHERE U.id=A.user_id " \
+        "ORDER BY A.date_added " \
+        "LIMIT 10"
+
+  result = db.session.execute(sql)
+  return result.fetchall()
+
+def display_albums_desc():
+  sql = "SELECT U.username, A.artist, A.album_name, A.date_added, R.comment, R.grade " \
+        "FROM albums A, users U, reviews R " \
+        "WHERE U.id=A.user_id " \
+        "ORDER BY A.album_name DESC"
+
+  result = db.session.execute(sql)
+  return result.fetchall()
+
+
+def display_albums_asc():
+  sql = "SELECT U.username, A.artist, A.album_name, A.date_added, R.comment, R.grade " \
+        "FROM albums A, users U, reviews R " \
+        "WHERE U.id=A.user_id " \
+        "ORDER BY A.album_name"
+
+  result = db.session.execute(sql)
+  return result.fetchall()
+
+
+def display_artists_desc():
+  sql = "SELECT U.username, A.artist, A.album_name, A.date_added, R.comment, R.grade " \
+        "FROM albums A, users U, reviews R " \
+        "WHERE U.id=A.user_id " \
+        "ORDER BY A.artist DESC"
+
+  result = db.session.execute(sql)
+  return result.fetchall()
+
+
+def display_artists_asc():
+  sql = "SELECT U.username, A.artist, A.album_name, A.date_added, R.comment, R.grade " \
+        "FROM albums A, users U, reviews R " \
+        "WHERE U.id=A.user_id " \
+        "ORDER BY A.artist"
+
+  result = db.session.execute(sql)
+  return result.fetchall()
+
+
+def display_date_desc():
+  sql = "SELECT U.username, A.artist, A.album_name, A.date_added, R.comment, R.grade " \
+        "FROM albums A, users U, reviews R " \
+        "WHERE U.id=A.user_id " \
+        "ORDER BY A.date_added DESC"
+
+  result = db.session.execute(sql)
+  return result.fetchall()
+
+
+def display_date_asc():
+  sql = "SELECT U.username, A.artist, A.album_name, A.date_added, R.comment, R.grade " \
+        "FROM albums A, users U, reviews R " \
+        "WHERE U.id=A.user_id " \
+        "ORDER BY A.date_added"
+
+  result = db.session.execute(sql)
+  return result.fetchall()
+
+
+def display_rating_desc():
+  sql = "SELECT U.username, A.artist, A.album_name, A.date_added, AVG(R.grade) " \
+        "FROM albums A, users U, reviews R " \
+        "LEFT OUTER JOIN R.album_id ON A.id " \
+        "GROUP BY A.album " \
+        "ORDER BY R.grade"
+
+  result = db.session.execute(sql)
+  return result.fetchall()
+
+
+def display_rating_asc():
+  sql = "SELECT U.username, A.artist, A.album_name, A.date_added " \
+        "FROM albums A, users U " \
+        "WHERE U.id=A.user_id " \
+        "ORDER BY A.date_added"
+
+  result = db.session.execute(sql)
+  return result.fetchall()
 
 
 def change_album_name(album_id:int, album_name:str):
@@ -57,15 +149,3 @@ def get_album_length(album_id:int):
 
 def change_visibility(album_id:int):
   print("change album visibility")
-"""
-      date_now = date.today()
-      artist = request.form("artist")
-      album_name = request.form("albumname")
-      release_year = request.form("releaseyear")
-      genre = request.form("genre").upper()
-      cover_image = request.form("cover_image")
-      comment = request.form("comment")
-      grade = request.form("grade")
-      songs = request.form("songs")
-
-"""

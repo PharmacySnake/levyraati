@@ -9,7 +9,7 @@
   CREATE TABLE Albums (
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES Users,
-    date_added DATE,
+    date_added TIMESTAMP,
     artist TEXT,
     album_name TEXT,
     release_year INTEGER,
@@ -37,12 +37,12 @@
   );
 
 
-  CREATE TABLE Review (
+  CREATE TABLE Reviews (
     id SERIAL PRIMARY KEY,
-    user_id INTEGER REFERENCES Users,
-    album_id INTEGER REFERENCES Albums,
     comment TEXT,
     grade INTEGER,
+    user_id INTEGER REFERENCES Users,
+    album_id INTEGER REFERENCES Albums,
     visible BOOLEAN
   );
 

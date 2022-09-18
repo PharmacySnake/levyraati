@@ -7,7 +7,8 @@ from services import user_serv
 
 @app.route("/")
 def home():
-  return render_template("home.html")
+  list = album_repo.display_albums_home()
+  return render_template("home.html", albums=list)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -127,6 +128,30 @@ def addalbum():
       return redirect("/")
 
 
+@app.route("/album", methods=["GET"])#, "POST"])
+def sort_albums():
+  if request.method == "GET":
+    sort = request.args.get("sort")
+    list = album_repo.display_albums_home()
+    if sort == "albums_desc":# in request.form:
+      list = album_repo.display_albums_desc()
+    elif sort == "albums_asc":# in request.form:
+      list = album_repo.display_albums_asc()
+    elif sort == "artists_desc":# in request.form:
+      list = album_repo.display_artists_desc()
+    elif sort == "artists_asc":# in request.form:
+      list = album_repo.display_artists_asc()
+    elif sort == "dates_desc":#  in request.form:
+      list = album_repo.display_date_desc()
+    elif sort == "dates_asc":# in request.form:
+      list = album_repo.display_date_asc()
+    elif sort == "grades_desc":# in request.form:
+      list = album_repo.display_rating_desc()
+    elif sort == "grades_asc":# in request.form:
+      list = album_repo.display_rating_desc()
+    return render_template("album.html", albums=list)
+
+
 @app.route("/addreview")#, methods="POST")
 def addreview():
   #comment = request.form("comment")
@@ -138,7 +163,7 @@ def addreview():
 def album(id:int):
   album_name = "ads"
   artist = "qwe"
-  return render_template("album.html", album=album_name)
+  return render_template("album.html")
 
 
 @app.route("/artist/<int:id>")
