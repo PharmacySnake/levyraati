@@ -5,12 +5,11 @@ from repositories import image_repo, review_repo, song_repo
 
 
 def add_album(artist:str, album_name:str, release_year:int, genre:str, comment:str,
-            cover_image:int, songs:list, songs_length:dict, grade:int):
+            cover_image, songs:list, songs_length:dict, grade:int):
     user_id = user_serv.user_id()
     if user_id == 0:
         return False
 
-    print("alpumin tekkoon")
     date_added = str(datetime.now())
     values = {"user_id":user_id, "date_added":date_added,
             "artist":artist, "album_name":album_name,
@@ -22,18 +21,38 @@ def add_album(artist:str, album_name:str, release_year:int, genre:str, comment:s
           "RETURNING id"
     result = db.session.execute(sql, values)
     db.session.commit()
-    print("tehtynnä")
     album_id = result.fetchone()[0]
+    print("a_id", album_id)
     if len(cover_image) > 0:
+      print("here in the image place")
       image_repo.add_cover_image(cover_image, album_id)
     if len(songs) > 0:
       song_repo.add_songs(songs, songs_length, album_id)
     review_repo.add_review(comment, grade, user_id, album_id)
     return True
 
+#get username with
+def get_album_by_id(id:int):
+  sql = "SELECT user_id, date_added, artist, album_name, release_year, genre " \
+        "FROM albums " \
+        "WHERE id=:id"
+
+  result = db.session.execute(sql, {"id":id})
+  return result.fetchall()
+
+#get username with
+def get_albums_by_artist_name(artist_name:str):
+  sql = "SELECT id, user_id, date_added, artist, album_name, release_year, genre " \
+        "FROM albums " \
+        "WHERE artist=:artist_name"# " \
+        #"GROUP BY album_name"
+
+  result = db.session.execute(sql, {"artist_name":artist_name})
+  return result.fetchall()
+
 #poistetaan jos turha
 def display_albums_home():
-  sql = "SELECT U.username, A.artist, A.album_name, A.date_added, R.comment, R.grade " \
+  sql = "SELECT U.username, A.id, A.artist, A.album_name, A.date_added, R.comment, R.grade " \
         "FROM albums A, users U, reviews R " \
         "WHERE U.id=A.user_id " \
         "ORDER BY A.date_added " \
@@ -47,7 +66,7 @@ def display_albums_desc():
         "FROM albums A, users U, reviews R " \
         "WHERE U.id=A.user_id " \
         "ORDER BY A.album_name DESC"
-
+        
   result = db.session.execute(sql)
   return result.fetchall()
 
@@ -104,20 +123,23 @@ def display_date_asc():
 
 def display_rating_desc():
   sql = "SELECT U.username, A.artist, A.album_name, A.date_added, AVG(R.grade) " \
-        "FROM albums A, users U, reviews R " \
-        "LEFT OUTER JOIN R.album_id ON A.id " \
-        "GROUP BY A.album " \
-        "ORDER BY R.grade"
-
+        "FROM albums A " \
+        "LEFT OUTER JOIN reviews R " \
+        "ON A.id = R.album_id " \
+        "LEFT OUTER JOIN users U " \
+        "ON R.user_id = U.id " \
+        "GROUP BY A.album_name " \
+        "ORDER BY AVG(R.grade) DESC"
   result = db.session.execute(sql)
   return result.fetchall()
 
 
 def display_rating_asc():
-  sql = "SELECT U.username, A.artist, A.album_name, A.date_added " \
-        "FROM albums A, users U " \
-        "WHERE U.id=A.user_id " \
-        "ORDER BY A.date_added"
+  sql = "SELECT U.username, A.artist, A.album_name, A.date_added, AVG(R.grade) " \
+        "FROM albums A, users U, reviews R " \
+        "LEFT OUTER JOIN R.album_id ON A.id " \
+        "GROUP BY A.id " \
+        "ORDER BY R.grade"
 
   result = db.session.execute(sql)
   return result.fetchall()

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
   <meta charset="utf-8">
-  <title>Albums</title>
+  <title>Album</title>
 </head>  
 
 <body>
@@ -11,53 +11,38 @@
     <a href="/login">Login</a><br>
     <a href="/register">Register</a>
   {% endif %}
-
-  <h1>Albums</h1>
-  <a>Sort albums:</a><br>
-  <form>
-    <select name="sort">
-      <option value="dates_asc" selected>dates ascending</option>
-      <option value="dateas_desc">dates descending</option>
-      <option value="albums_asc">albums ascending</option>
-      <option value="albums_desc">albums descending</option>
-      <option value="artists_asc">artists ascending</option>
-      <option value="artists_desc">artists descending</option>
-      <option value="grades_asc">grades ascending</option>
-      <option value="grades_desc">grades descending</option>
-    </select>
-    <button type="submit">submit</button>
-  </form>
-  <!--input type="submit" value="sort"><br-->
   
-  {% for album in albums %}
-    <a>Image would go here</a><br>
-    <a>{{ album.grade }}</a>
-    <a href="/artist/"+{{ album.artist }}>{{ album.artist }}</a><br>
-    <a>{{ album.album_name }}</a><br>
-    <a>{{ album.username }}</a><br>
-    <i>{{ album.date_added.strftime("%Y-%m-%d %H:%M") }}</i><br><br>
+  <br><br>
+  {% for nfo in album %}
+    <i>{{ nfo.artist }}</i><br>
+    <b>{{ nfo.album_name }}</b>
+    <a>({{ nfo.release_year }})</a><br>
   {% endfor %}
 
-  
-  <!--input type="submit" name="albums_desc" value="albums 🠳🠯">
-  <input type="submit" name="albums_asc" value="albums 🠱🠭">
-  <input type="submit" name="artists_desc" value="artist 🠳🠯">
-  <input type="submit" name="artists_asc" value="artist 🠱🠭">
-  <input type="submit" name="dates_desc" value="date 🠳🠯">
-  <input type="submit" name="dates_asc" value="date 🠱🠭">
-  <input type="submit" name="grades_desc" value="grade 🠳🠯">
-  <input type="submit" name="grades_asc" value="grade 🠱🠭"-->
-  
-  <!--input type="submit" name="sort_button" value="albums 🠳🠯">
-  <input type="submit" name="sort_button" value="albums 🠱🠭">
-  <input type="submit" name="sort_button" value="artist 🠳🠯">
-  <input type="submit" name="sort_button" value="artist 🠱🠭">
-  <input type="submit" name="sort_button" value="date 🠳🠯">
-  <input type="submit" name="sort_button" value="date 🠱🠭">
-  <input type="submit" name="sort_button" value="grade 🠳🠯">
-  <input type="submit" name="sort_button" value="grade 🠱🠭"-->
-  
+  <img src="data:;base64, {{ cover_image }}" alt=""><br>
+  {% for song in songs %}
+    <a>{{ song.song_name }} {{ song.song_len_min }}:{{ song.song_len_sec }}</a><br>
+  {% endfor %}
+  <br>
+  {% for review in reviews %}
+    <a>-----<br>
+      grade: {{ review.grade }}<br>
+      {{ review.comment }}<br>
+      user: {{ review.username }}<br>
+    </a>-----<br>
+  {% endfor %}
+  <form method="POST" enctype="multipart/form-data">
+    <a>Grade</a><br>
+    <a>- 1 - 2 - 3 - 4 - 5 -</a><br>
+    <input type="radio" name="grade" value="1" checked>
+    <input type="radio" name="grade" value="2" checked>
+    <input type="radio" name="grade" value="3" checked>
+    <input type="radio" name="grade" value="4" checked>
+    <input type="radio" name="grade" value="5" checked><br><br>
+    <a>Review album:</a><br>
+    <textarea name="comment" rows="5" cols="60"></textarea>{{ message_comment }}<br>
 
-
-
+    <input type="submit" value="Add review">{{ message_adding }}<br>
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+  </form>
 </body>

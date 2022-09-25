@@ -13,14 +13,14 @@
     <a href="/login">Login</a><br>
     <a href="/register">Register</a><br>
   {% endif %}
-  <a href="/album">Browse albums and reviews</a>
+  <a href="/albums">Browse albums and reviews</a>
 
   <h1>Welcome to Levyraati</h1>
-  <h3>New reviews</h3>
+  <h3>New albums</h3>
   {% for album in albums %}
     <a>Image would go here</a><br>
-    <a href="/artist/"{{ album.artist }}>{{ album.artist }}</a><br>
-    <a>{{ album.album_name }}</a><br>
+    <a href="/artist/{{ album.artist }}"">{{ album.artist }}</a><br>
+    <a href="/album/{{ album.id }}">{{ album.album_name }}</a><br>
     <a>{{ album.username }}</a><br>
     <i>{{ album.date_added.strftime("%Y-%m-%d %H:%M") }}</i><br><br>
   {% endfor %}

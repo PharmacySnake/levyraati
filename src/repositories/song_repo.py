@@ -22,6 +22,12 @@ def add_songs(songs:list, song_length:dict, album_id:int):
     db.session.execute(sql, values)
     db.session.commit()
 
+def get_songs_by_album_id(album_id:int):
+  sql = "SELECT song_name, song_len_min, song_len_sec " \
+        "FROM songs " \
+        "WHERE album_id=:album_id"
+  result = db.session.execute(sql, {"album_id":album_id})
+  return result.fetchall()
 
 def change_song_name(song_id:int, name:str):
   print("change song name")
