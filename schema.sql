@@ -41,6 +41,7 @@
     id SERIAL PRIMARY KEY,
     comment TEXT,
     grade INTEGER,
+    date_added TIMESTAMP,
     user_id INTEGER REFERENCES Users,
     album_id INTEGER REFERENCES Albums,
     visible BOOLEAN
