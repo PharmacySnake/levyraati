@@ -1,4 +1,4 @@
-from datetime import datetime
+#from datetime import datetime
 from db import db
 import services.user_serv as user_serv
 from repositories import image_repo, review_repo, song_repo
@@ -10,14 +10,14 @@ def add_album(artist:str, album_name:str, release_year:int, genre:str, comment:s
     if user_id == 0:
         return False
 
-    date_added = str(datetime.now())
-    values = {"user_id":user_id, "date_added":date_added,
+    #date_added = str(datetime.now())
+    values = {"user_id":user_id, #"date_added":date_added,
             "artist":artist, "album_name":album_name,
             "release_year":release_year, "genre":genre,
             "editable":True, "visible":True}
 
     sql = "INSERT INTO albums (user_id, date_added, artist, album_name, release_year, genre, editable, visible) "\
-          "VALUES (:user_id, :date_added, :artist, :album_name, :release_year, :genre, :editable, :visible) "\
+          "VALUES (:user_id, NOW(), :artist, :album_name, :release_year, :genre, :editable, :visible) "\
           "RETURNING id"
     result = db.session.execute(sql, values)
     db.session.commit()

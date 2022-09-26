@@ -5,8 +5,8 @@ def add_review(comment:str, grade:int, user_id:int, album_id:int):
   values = {"comment":comment, "grade":grade,
             "user_id":user_id, "album_id":album_id, 
             "visible":True}
-  sql = "INSERT INTO reviews (comment, grade, user_id, album_id, visible) "\
-        "VALUES (:comment, :grade, :user_id, :album_id, :visible)"
+  sql = "INSERT INTO reviews (comment, grade, date_added, user_id, album_id, visible) "\
+        "VALUES (:comment, :grade, NOW(), :user_id, :album_id, :visible)"
   db.session.execute(sql, values)
   db.session.commit()
 
