@@ -8,3 +8,4 @@ Levyraati is a application for rating music albums.
 Välipalautus 2.
 Unfortunately I got sick, which hindered the programs development. Levyraati is not yet in Heroku.
 New users can be registered, new albums can be added and viewed. Viewed albums can be sorted in different ways: date, alphapetica, artist name, album name and grade. Sort by grade doesn't workd unfortunately.
+Apparently the second "Välipalautus" was yesterday. As an update I am still sick. Album cover images are displayed when viewing a specific album. 
