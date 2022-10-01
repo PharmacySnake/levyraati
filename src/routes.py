@@ -128,9 +128,9 @@ def edit_album(id:int):
 @app.route("/albums", methods=["GET"])
 def sort_albums():
   if request.method == "GET":
-    albums = []
+    #albums = []
     sort = request.args.get("sort")
-    albums = album_repo.display_albums_home()
+    #albums = album_repo.display_albums_home()
     if sort == "albums_desc":
       albums = album_repo.display_albums_desc()
     elif sort == "albums_asc":
