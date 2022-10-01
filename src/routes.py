@@ -146,8 +146,8 @@ def sort_albums():
       albums = album_repo.display_rating_desc()
     elif sort == "grades_asc":
       albums = album_repo.display_rating_desc()
-    return render_template("albums.html", albums=albums)
-    #return redirect("albums.html", albums=albums)
+    #return render_template("albums.html", albums=albums)
+    return redirect("albums.html", albums=albums)
 
 
 @app.route("/addreview")#, methods="POST")
