@@ -6,21 +6,27 @@
 
 <body>
   {% if session.user_id %}
-    <a href="/logout">Logout</a>
+    <a href="/logout">Logout</a><br>
+    <a href="/addalbum">Add a new album and review</a><br>
   {% else %}
     <a href="/login">Login</a><br>
   {% endif %}
-  
+  <a href="/home">Go back to front page</a><br>
+  <a href="/albums">Browse albums and reviews</a><br>
+
   <h1>Create new account</h1>
+  {{ message }}
   <form action="/register" method="POST">
     <p>Username:<br>
-      <input type="text" name="username">
+      <input type="text" name="username">{{ message_user }}
     </p>
     <p>Password:<br>
-      <input type="password" name="password1"><br>
+      <input type="password" name="password1"><br>{{ message_password }}
       Repeat password:<br>
       <input type="password" name="password2"><br>
     </p>
+    <input type="checkbox" id="admin" name="admin" value="1">
+    <label for="admin"> Admin?</label><br>
     <p>Register account?
       <input type="submit" value="Do it">
     </p>

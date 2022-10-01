@@ -4,21 +4,27 @@ from services import user_serv
 import secrets
 
 
-def register(username:str, password:str):
+def register(username:str, password:str, admin:bool):
   print("register")
   try:
     hash_value = generate_password_hash(password)
-    values = {"username":username, "passwrd":hash_value, "is_admin":False}
+    values = {"username":username, "passwrd":hash_value, "is_admin":admin}
 
     sql = "INSERT INTO users (username, passwrd, is_admin) " \
           "VALUES (:username, :passwrd, :is_admin)"
-    #db.session.execute(sql, {"username":username, "passwrd":hash_value, "is_admin":a})
     db.session.execute(sql, values)
     db.session.commit()    
   except:
     return False
   return login(username, password)
 
+
+def check_username_availability(username:str):
+  sql = "SELECT username " \
+        "FROM users " \
+        "WHERE username=:username"
+  result = db.session.execute(sql, {"username":username})
+  return bool(result.fetchall())
 
 def login(username:str, password:str):
   sql = "SELECT id, passwrd, is_admin " \

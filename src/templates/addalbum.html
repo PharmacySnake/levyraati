@@ -8,14 +8,14 @@
   <div>
   {% if session.user_id %}
     <b>You are logged in as {{ session.username }}</b><br>
-    <a href="/">Return to front page</a><br>
-    <a href="/logout">Logout</a>
+    <a href="/logout">Logout</a><br>
   {% else %}
     <b>You are not logged in</b><br>
-    <a href="/">Return to front page</a><br>
     <a href="/login">Login</a><br>
-    <a href="/register">Register a new accout</a>
+    <a href="/register">Register a new accout</a><br>
   {% endif %}
+  <a href="/home">Go back to front page</a>
+  <a href="/albums">Browse albums and reviews</a><br>
   </div>
 <hr>
 

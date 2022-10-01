@@ -7,10 +7,12 @@
 <body>
   {% if session.user_id %}
     <a href="/logout">Logout</a>
+    <a href="/addalbum">Add a new album and review</a><br>
   {% else %}
     <a href="/login">Login</a><br>
     <a href="/register">Register</a>
   {% endif %}
+  <a href="/home">Go back to front page</a>
 
   <h1>Albums</h1>
   <a>Sort albums:</a><br>

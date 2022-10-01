@@ -37,23 +37,27 @@ def register():
     username = request.form["username"]
     password1 = request.form["password1"]
     password2 = request.form["password2"]
+    admin = False
+    if int(request.form["admin"]) == 1:
+      admin = True
     
     if len(username) < 1:
-      return render_template("error.html", message="Username is too short.\nUsername has to be between one (1) and twentytwo (22) characters.\n")
+      return render_template("register.html", message_user="Username is too short.\nUsername has to be between one (1) and twentytwo (22) characters.\n")
     elif len(username) > 23:
-      return render_template("error.html", message="Username is too short.\nUsername has to be between one (1) and twentytwo (22) characters.\n")
-    
+      return render_template("register.html", message_user="Username is too short.\nUsername has to be between one (1) and twentytwo (22) characters.\n")
+    elif user_repo.check_username_availability(username):
+      return render_template("register.html", message_user="Username is taken.")
     if len(password1) < 8:
-      return render_template("error.html", message="Password should be between eight (8) and thirtytwo (32) characters")
+      return render_template("register.html", message_password="Password should be between eight (8) and thirtytwo (32) characters")
     elif len(password1) > 32:
-      return render_template("error.html", message="Password should be between eight (8) and thirtytwo (32) characters")
+      return render_template("register.html", message_password="Password should be between eight (8) and thirtytwo (32) characters")
     elif password1 != password2:
-      return render_template("error.html", message="Passwords do not match")
+      return render_template("register.html", message_password="Passwords do not match")
     
-    if user_repo.register(username, password1):
+    if user_repo.register(username, password1, admin):
       return redirect("/")
     
-    return render_template("error.html", message="Account creation failed")
+    return render_template("register.html", message="Account creation failed")
   
 
 @app.route("/addalbum", methods=["GET", "POST"])
@@ -72,14 +76,10 @@ def addalbum():
 
       genre = request.form["genre"].upper()
       file = request.files["cover_image"]
-      #print(cover_image)
-      #print(1)
       if not file.filename.endswith(".jpg"):
         return render_template("addalbum.html", message_image="Invalid file type. Only .jpg files accepted.")
       cover_image = file.read()
       print(len(cover_image), "bytes")
-      #print(cover_image)
-      #print(2)
       if len(cover_image) > 1024*1024:
         return render_template("addalbum.html", message_image="Image is too large")
       comment = request.form["comment"]
@@ -130,23 +130,24 @@ def sort_albums():
   if request.method == "GET":
     sort = request.args.get("sort")
     albums = album_repo.display_albums_home()
-    if sort == "albums_desc":# in request.form:
+    if sort == "albums_desc":
       albums = album_repo.display_albums_desc()
-    elif sort == "albums_asc":# in request.form:
+    elif sort == "albums_asc":
       albums = album_repo.display_albums_asc()
-    elif sort == "artists_desc":# in request.form:
+    elif sort == "artists_desc":
       albums = album_repo.display_artists_desc()
-    elif sort == "artists_asc":# in request.form:
+    elif sort == "artists_asc":
       albums = album_repo.display_artists_asc()
-    elif sort == "dates_desc":#  in request.form:
+    elif sort == "dates_desc":
       albums = album_repo.display_date_desc()
-    elif sort == "dates_asc":# in request.form:
+    elif sort == "dates_asc":
       albums = album_repo.display_date_asc()
-    elif sort == "grades_desc":# in request.form:
+    elif sort == "grades_desc":
       albums = album_repo.display_rating_desc()
-    elif sort == "grades_asc":# in request.form:
+    elif sort == "grades_asc":
       albums = album_repo.display_rating_desc()
-    return render_template("albums.html", albums=albums)
+    #return render_template("albums.html", albums=albums)
+    return redirect("albums.html", albums=albums)
 
 
 @app.route("/addreview")#, methods="POST")
