@@ -125,9 +125,10 @@ def edit_album(id:int):
   return redirect("/")
 
 
-@app.route("/albums", methods=["GET"])#, "POST"])
+@app.route("/albums", methods=["GET"])
 def sort_albums():
   if request.method == "GET":
+    albums = []
     sort = request.args.get("sort")
     albums = album_repo.display_albums_home()
     if sort == "albums_desc":
@@ -146,8 +147,8 @@ def sort_albums():
       albums = album_repo.display_rating_desc()
     elif sort == "grades_asc":
       albums = album_repo.display_rating_desc()
-    #return render_template("albums.html", albums=albums)
-    return redirect("albums.html", albums=albums)
+    return render_template("albums.html", albums=albums)
+    #return redirect("albums.html", albums=albums)
 
 
 @app.route("/addreview")#, methods="POST")
