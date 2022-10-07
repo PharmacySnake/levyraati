@@ -120,8 +120,24 @@ def display_date_asc():
   result = db.session.execute(sql)
   return result.fetchall()
 
-
+'''
+sun pitää varmaan tos queryssä tehdä 
+GROUP BY U.username, A.artist, A.album_name, A.date_added
+koska sulla on toi 
+AVG(R.grade) aggregation niin noi kaikki muut fieldit pitää olla tossa 
+group by-osiossa
+'''
 def display_rating_desc():
+  sql = "SELECT AVG(R.grade) " \
+        "FROM albums A " \
+        "LEFT OUTER JOIN reviews R " \
+        "ON A.id = R.album_id " \
+        "LEFT OUTER JOIN users U " \
+        "ON R.user_id = U.id " \
+        "GROUP BY U.username, A.artist, A.album_name, A.album_name, A.date_added " \
+        "ORDER BY AVG(R.grade) DESC"
+  
+  '''
   sql = "SELECT U.username, A.artist, A.album_name, A.date_added, AVG(R.grade) " \
         "FROM albums A " \
         "LEFT OUTER JOIN reviews R " \
@@ -130,6 +146,7 @@ def display_rating_desc():
         "ON R.user_id = U.id " \
         "GROUP BY A.album_name " \
         "ORDER BY AVG(R.grade) DESC"
+  '''
   result = db.session.execute(sql)
   return result.fetchall()
 
