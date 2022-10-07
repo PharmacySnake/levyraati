@@ -134,7 +134,7 @@ def display_rating_desc():
         "ON A.id = R.album_id " \
         "LEFT OUTER JOIN users U " \
         "ON R.user_id = U.id " \
-        "GROUP BY U.username, A.artist, A.album_name, A.album_name, A.date_added " \
+        "GROUP BY A.artist, A.album_name, A.album_name " \
         "ORDER BY AVG(R.grade) DESC"
   
   '''
