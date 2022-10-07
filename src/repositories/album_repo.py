@@ -128,14 +128,11 @@ AVG(R.grade) aggregation niin noi kaikki muut fieldit pitää olla tossa
 group by-osiossa
 '''
 def display_rating_desc():
-  sql = "SELECT AVG(R.grade) " \
-        "FROM albums A " \
-        "LEFT OUTER JOIN reviews R " \
-        "ON A.id = R.album_id " \
-        "LEFT OUTER JOIN users U " \
-        "ON R.user_id = U.id " \
-        "GROUP BY A.artist, A.album_name, A.album_name " \
-        "ORDER BY AVG(R.grade) DESC"
+  sql = "SELECT U.username, A.date_added, A.album_name, A.artist, avg(R.grade) " \
+	      "FROM reviews R " \
+	      "LEFT JOIN albums A ON A.id = R.album_id " \
+	      "LEFT JOIN users U ON A.user_id = U.id " \
+	      "GROUP BY A.album_name, U.username, A.date_added"
   
   '''
   sql = "SELECT U.username, A.artist, A.album_name, A.date_added, AVG(R.grade) " \
