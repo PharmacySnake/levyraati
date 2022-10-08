@@ -50,20 +50,21 @@ def get_albums_by_artist_name(artist_name:str):
   result = db.session.execute(sql, {"artist_name":artist_name})
   return result.fetchall()
 
-#poistetaan jos turha
+
 def display_albums_home():
-  sql = "SELECT U.username, A.date_added, A.album_name, A.artist, avg(R.grade) AS grade " \
+  sql = "SELECT U.username, A.date_added, A.album_name, A.artist, CAST(AVG(R.grade)*2 AS INTEGER) AS grade " \
 	      "FROM reviews R " \
 	      "LEFT JOIN albums A ON A.id = R.album_id " \
 	      "LEFT JOIN users U ON A.user_id = U.id " \
 	      "GROUP BY A.album_name, A.artist, U.username, A.date_added " \
-	      "ORDER BY A.album_name DESC " \
+	      "ORDER BY A.date_added DESC " \
         "LIMIT 10"
   result = db.session.execute(sql)
   return result.fetchall()
 
+
 def display_albums_desc():
-  sql = "SELECT U.username, A.date_added, A.album_name, A.artist, avg(R.grade) AS grade " \
+  sql = "SELECT U.username, A.date_added, A.album_name, A.artist, CAST(AVG(R.grade)*2 AS INTEGER) AS grade " \
 	      "FROM reviews R " \
 	      "LEFT JOIN albums A ON A.id = R.album_id " \
 	      "LEFT JOIN users U ON A.user_id = U.id " \
@@ -74,7 +75,7 @@ def display_albums_desc():
 
 
 def display_albums_asc():
-  sql = "SELECT U.username, A.date_added, A.album_name, A.artist, avg(R.grade) AS grade " \
+  sql = "SELECT U.username, A.date_added, A.album_name, A.artist, CAST(AVG(R.grade)*2 AS INTEGER) AS grade " \
 	      "FROM reviews R " \
 	      "LEFT JOIN albums A ON A.id = R.album_id " \
 	      "LEFT JOIN users U ON A.user_id = U.id " \
@@ -85,7 +86,7 @@ def display_albums_asc():
 
 
 def display_artists_desc():
-  sql = "SELECT U.username, A.date_added, A.album_name, A.artist, avg(R.grade) AS grade " \
+  sql = "SELECT U.username, A.date_added, A.album_name, A.artist, CAST(AVG(R.grade)*2 AS INTEGER) AS grade " \
 	      "FROM reviews R " \
 	      "LEFT JOIN albums A ON A.id = R.album_id " \
 	      "LEFT JOIN users U ON A.user_id = U.id " \
@@ -96,7 +97,7 @@ def display_artists_desc():
 
 
 def display_artists_asc():
-  sql = "SELECT U.username, A.date_added, A.album_name, A.artist, avg(R.grade) AS grade " \
+  sql = "SELECT U.username, A.date_added, A.album_name, A.artist, CAST(AVG(R.grade)*2 AS INTEGER) AS grade " \
 	      "FROM reviews R " \
 	      "LEFT JOIN albums A ON A.id = R.album_id " \
 	      "LEFT JOIN users U ON A.user_id = U.id " \
@@ -107,7 +108,7 @@ def display_artists_asc():
 
 
 def display_date_desc():
-  sql = "SELECT U.username, A.date_added, A.album_name, A.artist, avg(R.grade) AS grade " \
+  sql = "SELECT U.username, A.date_added, A.album_name, A.artist, CAST(AVG(R.grade)*2 AS INTEGER) AS grade " \
 	      "FROM reviews R " \
 	      "LEFT JOIN albums A ON A.id = R.album_id " \
 	      "LEFT JOIN users U ON A.user_id = U.id " \
@@ -118,7 +119,7 @@ def display_date_desc():
 
 
 def display_date_asc():
-  sql = "SELECT U.username, A.date_added, A.album_name, A.artist, avg(R.grade) AS grade " \
+  sql = "SELECT U.username, A.date_added, A.album_name, A.artist, CAST(AVG(R.grade)*2 AS INTEGER) AS grade " \
 	      "FROM reviews R " \
 	      "LEFT JOIN albums A ON A.id = R.album_id " \
 	      "LEFT JOIN users U ON A.user_id = U.id " \
@@ -129,7 +130,7 @@ def display_date_asc():
 
 
 def display_rating_desc():
-  sql = "SELECT U.username, A.date_added, A.album_name, A.artist, AVG(R.grade) AS grade " \
+  sql = "SELECT U.username, A.date_added, A.album_name, A.artist, CAST(AVG(R.grade)*2 AS INTEGER) AS grade " \
 	      "FROM reviews R " \
 	      "LEFT JOIN albums A ON A.id = R.album_id " \
 	      "LEFT JOIN users U ON A.user_id = U.id " \
