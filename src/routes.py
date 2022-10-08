@@ -9,10 +9,15 @@ from services import user_serv
 def home():
   albums = album_repo.display_albums_home()
   #imagee = albums[1].cover_img
+  newalbums = []
   for i in range(len(albums)):
-    albums[i][4] = b64encode(albums[i][4]).decode('utf-8')
+    for j in range(5):
+      if j != 4:
+        newalbums[i] = albums[i][j]
+      else: 
+        newalbums[i] = b64encode(albums[i][4]).decode('utf-8')
   #imagee = b64encode(data).decode('utf-8')
-  return render_template("home.html", albums=albums)#, imagee=imagee)
+  return render_template("home.html", albums=newalbums)#, imagee=imagee)
 
 
 @app.route("/login", methods=["GET", "POST"])
