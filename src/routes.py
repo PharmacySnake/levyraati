@@ -11,8 +11,10 @@ def home():
   #imagee = albums[1].cover_img
   newalbums = []
 
-  for i in range(len(albums)):
-    newalbums[i] = albums[i]
+  #for i in range(len(albums)):
+  for i in albums:
+    #newalbums[i] = albums[i]
+    newalbums[i] = i
     newalbums[i][4] = b64encode(albums[i][4]).decode('utf-8')
     albums[i] = newalbums[i]
   #imagee = b64encode(data).decode('utf-8')
