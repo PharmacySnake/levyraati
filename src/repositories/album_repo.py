@@ -128,33 +128,23 @@ AVG(R.grade) aggregation niin noi kaikki muut fieldit pitää olla tossa
 group by-osiossa
 '''
 def display_rating_desc():
-  sql = "SELECT U.username, A.date_added, A.album_name, A.artist, avg(R.grade) " \
+  sql = "SELECT U.username, A.date_added, A.album_name, A.artist, AVG(R.grade) " \
 	      "FROM reviews R " \
 	      "LEFT JOIN albums A ON A.id = R.album_id " \
 	      "LEFT JOIN users U ON A.user_id = U.id " \
-	      "GROUP BY A.album_name, A.artist, U.username, A.date_added"
-  
-  '''
-  sql = "SELECT U.username, A.artist, A.album_name, A.date_added, AVG(R.grade) " \
-        "FROM albums A " \
-        "LEFT OUTER JOIN reviews R " \
-        "ON A.id = R.album_id " \
-        "LEFT OUTER JOIN users U " \
-        "ON R.user_id = U.id " \
-        "GROUP BY A.album_name " \
+	      "GROUP BY A.album_name, A.artist, U.username, A.date_added " \
         "ORDER BY AVG(R.grade) DESC"
-  '''
   result = db.session.execute(sql)
   return result.fetchall()
 
 
 def display_rating_asc():
-  sql = "SELECT U.username, A.artist, A.album_name, A.date_added, AVG(R.grade) " \
-        "FROM albums A, users U, reviews R " \
-        "LEFT OUTER JOIN R.album_id ON A.id " \
-        "GROUP BY A.id " \
-        "ORDER BY R.grade"
-
+  sql = "SELECT U.username, A.date_added, A.album_name, A.artist, AVG(R.grade) " \
+	      "FROM reviews R " \
+	      "LEFT JOIN albums A ON A.id = R.album_id " \
+	      "LEFT JOIN users U ON A.user_id = U.id " \
+	      "GROUP BY A.album_name, A.artist, U.username, A.date_added " \
+        "ORDER BY AVG(R.grade)"
   result = db.session.execute(sql)
   return result.fetchall()
 
