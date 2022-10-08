@@ -18,17 +18,10 @@
   <h1>Welcome to Levyraati</h1>
   <h3>New albums</h3>
   {% for i in range(0, len) %}
-    <!--a>{{ imagee }}</a-->
-    <!--img src="data:;base64, {{ album.cover_img }}" alt=""><br-->
-    <!--img src="data:;base64, {{ imagee }}" alt=""><br-->
     <img src="data:;base64, {{ images[i] }}" alt=""><br>
-    <!--a href="/artist/{{ album.artist }}"">{{ album.artist }}</a><br-->
     <a href="/artist/{{ albums[i].artist }}">{{ albums[i].artist }}</a><br>
-    <!--a href="/album/{{ album.id }}">{{ album.album_name }}</a><br-->
     <a href="/album/{{ albums[i].id }}">{{ albums[i].album_name }}</a><br>
-    <!--a>{{ album.username }}</a><br-->
     <a>{{ albums[i].username }}</a><br>
-    <!--i>{{ album.date_added.strftime("%Y-%m-%d %H:%M") }}</i><br><br-->
     <i>{{ albums[i].date_added.strftime("%Y-%m-%d %H:%M") }}</i><br><br>
   {% endfor %}
 
