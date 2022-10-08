@@ -10,8 +10,9 @@ def home():
   albums = album_repo.display_albums_home()
   #imagee = albums[1].cover_img
   newalbums = []
+
   for i in range(len(albums)):
-    for j in range(5):
+    for j in range(len(albums[i])):
       if j != 4:
         newalbums[i] = albums[i][j]
       else: 
