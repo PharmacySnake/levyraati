@@ -11,6 +11,7 @@ def home():
   #imagee = albums[1].cover_img
   modified_album = []
   modified_part = []
+  images = []
 
   #for i in range(len(albums)):
     #newalbums[i] = albums[i]
@@ -21,11 +22,12 @@ def home():
     modified_part = list(part)
     modified_image  = part.cover_img
     modified_image = b64encode(modified_image).decode('utf-8')
-    modified_part[4] = modified_image
-    modified_album.append(tuple(modified_part))
-  albums = modified_album[:]
+    #modified_part[4] = modified_image
+    #modified_album.append(tuple(modified_part))
+    images.append(modified_image)
+  #albums = modified_album[:]
   #imagee = b64encode(data).decode('utf-8')
-  return render_template("home.html", albums=albums)#, imagee=imagee)
+  return render_template("home.html", albums=albums, images=images, len=len(albums))#, imagee=imagee)
 
 
 @app.route("/login", methods=["GET", "POST"])
