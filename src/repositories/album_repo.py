@@ -52,6 +52,15 @@ def get_albums_by_artist_name(artist_name:str):
 
 
 def display_albums_home():
+  sql = "SELECT U.username, A.date_added, A.album_name, A.artist, " \
+               "I.cover_img, CAST(AVG(R.grade)*2 AS INTEGER) AS grade " \
+	      "FROM reviews R " \
+	      "LEFT JOIN albums A ON A.id = R.album_id " \
+	      "LEFT JOIN users U ON A.user_id = U.id " \
+	      "LEFT JOIN images I ON A.id = I.album_id " \
+	      "GROUP BY A.album_name, A.artist, U.username, A.date_added, I.cover_img " \
+	      "ORDER BY A.date_added DESC LIMIT 10"
+  """
   sql = "SELECT U.username, A.date_added, A.album_name, A.artist, CAST(AVG(R.grade)*2 AS INTEGER) AS grade " \
 	      "FROM reviews R " \
 	      "LEFT JOIN albums A ON A.id = R.album_id " \
@@ -59,6 +68,7 @@ def display_albums_home():
 	      "GROUP BY A.album_name, A.artist, U.username, A.date_added " \
 	      "ORDER BY A.date_added DESC " \
         "LIMIT 10"
+  """
   result = db.session.execute(sql)
   return result.fetchall()
 
