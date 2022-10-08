@@ -8,7 +8,7 @@ from services import user_serv
 def home():
   albums = album_repo.display_albums_home()
   #imagee = albums[1].cover_img
-  imagee = albums[1][5]
+  imagee = albums[1][4]
   return render_template("home.html", albums=albums, imagee=imagee)
 
 
