@@ -145,6 +145,7 @@ def sort_albums():
       albums = album_repo.display_date_asc()
     elif sort == "grades_desc":
       albums = album_repo.display_rating_desc()
+      print("grade:",albums.grade)
     elif sort == "grades_asc":
       albums = album_repo.display_rating_desc()
     return render_template("albums.html", albums=albums)
