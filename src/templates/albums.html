@@ -33,12 +33,7 @@
   {% for album in albums %}
     <a>Image would go here</a><br>
     <a>Grade: [</a>> 
-    <!--{% for i in range(0, album.grade) %}
-      <a>|</a>
-    {% endfor %}
-    {% for i in range(0, (10 - album.grade)) %}
-      <a>·</a>
-    {% endfor %}-->
+    
     <a>album.grade</a>      
     <a>]</a><br>
     <a href="/artist/{{ album.artist }}">{{ album.artist }}</a><br>
