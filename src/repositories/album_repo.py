@@ -59,7 +59,9 @@ def display_albums_home():
 	      "LEFT JOIN users U ON A.user_id = U.id " \
 	      "LEFT JOIN images I ON A.id = I.album_id " \
 	      "GROUP BY A.album_name, A.artist, U.username, A.date_added, I.cover_img " \
-	      "ORDER BY A.date_added DESC LIMIT 10"
+	      "ORDER BY A.date_added DESC " \
+        "LIMIT 10"
+  #cover_image = b64encode(data).decode('utf-8')
   """
   sql = "SELECT U.username, A.date_added, A.album_name, A.artist, CAST(AVG(R.grade)*2 AS INTEGER) AS grade " \
 	      "FROM reviews R " \

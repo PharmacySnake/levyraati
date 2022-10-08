@@ -7,7 +7,8 @@ from services import user_serv
 @app.route("/")
 def home():
   albums = album_repo.display_albums_home()
-  return render_template("home.html", albums=albums)
+  imagee = album[4][0]
+  return render_template("home.html", albums=albums, imagee=imagee)
 
 
 @app.route("/login", methods=["GET", "POST"])
