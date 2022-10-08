@@ -132,7 +132,7 @@ def display_rating_desc():
 	      "FROM reviews R " \
 	      "LEFT JOIN albums A ON A.id = R.album_id " \
 	      "LEFT JOIN users U ON A.user_id = U.id " \
-	      "GROUP BY A.album_name, U.username, A.date_added"
+	      "GROUP BY A.album_name, A.artist, U.username, A.date_added"
   
   '''
   sql = "SELECT U.username, A.artist, A.album_name, A.date_added, AVG(R.grade) " \
