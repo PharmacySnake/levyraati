@@ -17,12 +17,12 @@ def home():
     #print(message[0], message[1])
     #print(message.id, message.content)
     #print(message["id"], message["content"])
-    modified_part = part
+    modified_part = part[:]
     modified_image  = part.cover_img
     modified_image = b64encode(modified_image).decode('utf-8')
     modified_part.cover_img = modified_image
     modified_album.append(modified_part)
-  albums = modified_album
+  albums = modified_album[:]
   #imagee = b64encode(data).decode('utf-8')
   return render_template("home.html", albums=albums)#, imagee=imagee)
 
