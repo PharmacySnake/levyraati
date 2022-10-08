@@ -56,7 +56,7 @@ def display_albums_home():
 	      "FROM reviews R " \
 	      "LEFT JOIN albums A ON A.id = R.album_id " \
 	      "LEFT JOIN users U ON A.user_id = U.id " \
-	      "GROUP BY A.album_name, U.username, A.date_added " \
+	      "GROUP BY A.album_name, A.artist, U.username, A.date_added " \
 	      "ORDER BY A.album_name DESC " \
         "LIMIT 10"
   result = db.session.execute(sql)
@@ -67,7 +67,7 @@ def display_albums_desc():
 	      "FROM reviews R " \
 	      "LEFT JOIN albums A ON A.id = R.album_id " \
 	      "LEFT JOIN users U ON A.user_id = U.id " \
-	      "GROUP BY A.album_name, U.username, A.date_added " \
+	      "GROUP BY A.album_name, A.artist, U.username, A.date_added " \
 	      "ORDER BY A.album_name DESC"
   result = db.session.execute(sql)
   return result.fetchall()
@@ -78,7 +78,7 @@ def display_albums_asc():
 	      "FROM reviews R " \
 	      "LEFT JOIN albums A ON A.id = R.album_id " \
 	      "LEFT JOIN users U ON A.user_id = U.id " \
-	      "GROUP BY A.album_name, U.username, A.date_added " \
+	      "GROUP BY A.album_name, A.artist, U.username, A.date_added " \
 	      "ORDER BY A.album_name"
   result = db.session.execute(sql)
   return result.fetchall()
@@ -89,7 +89,7 @@ def display_artists_desc():
 	      "FROM reviews R " \
 	      "LEFT JOIN albums A ON A.id = R.album_id " \
 	      "LEFT JOIN users U ON A.user_id = U.id " \
-	      "GROUP BY A.album_name, U.username, A.date_added " \
+	      "GROUP BY A.album_name, A.artist, U.username, A.date_added " \
 	      "ORDER BY A.artist DESC"
   result = db.session.execute(sql)
   return result.fetchall()
@@ -100,7 +100,7 @@ def display_artists_asc():
 	      "FROM reviews R " \
 	      "LEFT JOIN albums A ON A.id = R.album_id " \
 	      "LEFT JOIN users U ON A.user_id = U.id " \
-	      "GROUP BY A.album_name, U.username, A.date_added " \
+	      "GROUP BY A.album_name, A.artist, U.username, A.date_added " \
 	      "ORDER BY A.artist"
   result = db.session.execute(sql)
   return result.fetchall()
@@ -111,7 +111,7 @@ def display_date_desc():
 	      "FROM reviews R " \
 	      "LEFT JOIN albums A ON A.id = R.album_id " \
 	      "LEFT JOIN users U ON A.user_id = U.id " \
-	      "GROUP BY A.album_name, U.username, A.date_added " \
+	      "GROUP BY A.album_name, A.artist, U.username, A.date_added " \
 	      "ORDER BY A.date_added DESC"
   result = db.session.execute(sql)
   return result.fetchall()
@@ -122,7 +122,7 @@ def display_date_asc():
 	      "FROM reviews R " \
 	      "LEFT JOIN albums A ON A.id = R.album_id " \
 	      "LEFT JOIN users U ON A.user_id = U.id " \
-	      "GROUP BY A.album_name, U.username, A.date_added " \
+	      "GROUP BY A.album_name, A.artist, U.username, A.date_added " \
 	      "ORDER BY A.date_added DESC"
   result = db.session.execute(sql)
   return result.fetchall()
