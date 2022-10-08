@@ -139,7 +139,7 @@ def display_rating_desc():
 
 
 def display_rating_asc():
-  sql = "SELECT U.username, A.date_added, A.album_name, A.artist, AVG(R.grade) " \
+  sql = "SELECT U.username, A.date_added, A.album_name, A.artist, AVG(R.grade) AS grade " \
 	      "FROM reviews R " \
 	      "LEFT JOIN albums A ON A.id = R.album_id " \
 	      "LEFT JOIN users U ON A.user_id = U.id " \

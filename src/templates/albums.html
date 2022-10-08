@@ -32,7 +32,7 @@
   
   {% for album in albums %}
     <a>Image would go here</a><br>
-    <a>{{ album.grade }}</a><br>
+    <a>Grade: {{ album.grade }}</a><br>
     <a href="/artist/{{ album.artist }}">{{ album.artist }}</a><br>
     <a href="/album/{{ album.id }}">{{ album.album_name }}</a><br>
     <a>{{ album.username }}</a><br>
