@@ -14,9 +14,9 @@ def home():
   for i in range(len(albums)):
     for j in range(len(albums[i])):
       if j != 4:
-        newalbums[i][j] = albums[i][j]
+        newalbums[i] = albums[i][j]
       else: 
-        newalbums[i][j] = b64encode(albums[i][4]).decode('utf-8')
+        newalbums[i] = b64encode(albums[i][4]).decode('utf-8')
   #imagee = b64encode(data).decode('utf-8')
   return render_template("home.html", albums=newalbums)#, imagee=imagee)
 
