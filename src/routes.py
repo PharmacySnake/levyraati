@@ -9,7 +9,7 @@ from services import user_serv
 def home():
   albums = album_repo.display_albums_home()
   #imagee = albums[1].cover_img
-  
+  modified_album = []
 
   #for i in range(len(albums)):
     #newalbums[i] = albums[i]
@@ -17,8 +17,12 @@ def home():
     #print(message[0], message[1])
     #print(message.id, message.content)
     #print(message["id"], message["content"])
-    modified_part  = part.cover_img
-    part.cover_img = b64encode(modified_part).decode('utf-8')
+    modified_part = part
+    modified_image  = part.cover_img
+    modified_image = b64encode(modified_image).decode('utf-8')
+    modified_part.cover_img = modified_image
+    modified_album.append(modified_part)
+  albums = modified_album
   #imagee = b64encode(data).decode('utf-8')
   return render_template("home.html", albums=albums)#, imagee=imagee)
 
