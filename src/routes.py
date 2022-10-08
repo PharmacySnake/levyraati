@@ -1,3 +1,4 @@
+from base64 import b64encode
 from app import app
 from flask import render_template, redirect, request, session, make_response, flash
 from repositories import image_repo, review_repo, song_repo, user_repo, album_repo
@@ -8,7 +9,8 @@ from services import user_serv
 def home():
   albums = album_repo.display_albums_home()
   #imagee = albums[1].cover_img
-  imagee = albums[1][4]
+  data = albums[1][4]
+  imagee = b64encode(data).decode('utf-8')
   return render_template("home.html", albums=albums, imagee=imagee)
 
 
