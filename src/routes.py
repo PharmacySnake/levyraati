@@ -20,7 +20,7 @@ def home():
     modified_part = part[:]
     modified_image  = part.cover_img
     modified_image = b64encode(modified_image).decode('utf-8')
-    modified_part.cover_img = modified_image
+    modified_part[4] = modified_image
     modified_album.append(modified_part)
   albums = modified_album[:]
   #imagee = b64encode(data).decode('utf-8')
