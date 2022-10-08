@@ -145,10 +145,10 @@ def sort_albums():
       albums = album_repo.display_date_asc()
     elif sort == "grades_desc":
       albums = album_repo.display_rating_desc()
-      print("grade:",albums.grade)
+      frade = int(albums[4]*2)
     elif sort == "grades_asc":
       albums = album_repo.display_rating_desc()
-    return render_template("albums.html", albums=albums)
+    return render_template("albums.html", albums=albums, frade=frade)
     #return redirect("albums.html", albums=albums)
 
 
