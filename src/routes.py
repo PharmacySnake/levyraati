@@ -131,32 +131,32 @@ def sort_albums():
     #albums = []
     sort = request.args.get("sort")
     albums = album_repo.display_albums_asc()
-    frade = int(albums[4]*2)
+    frade = int(albums[3]*2)
     if sort == "albums_desc":
       albums = album_repo.display_albums_desc()
-      frade = int(albums[4]*2)
+      frade = int(albums[3]*2)
     elif sort == "albums_asc":
       albums = album_repo.display_albums_asc()
-      frade = int(albums[4]*2)
+      frade = int(albums[3]*2)
     elif sort == "artists_desc":
       albums = album_repo.display_artists_desc()
-      frade = int(albums[4]*2)
+      frade = int(albums[3]*2)
     elif sort == "artists_asc":
       albums = album_repo.display_artists_asc()
-      frade = int(albums[4]*2)
+      frade = int(albums[3]*2)
     elif sort == "dates_desc":
       albums = album_repo.display_date_desc()
-      frade = int(albums[4]*2)
+      frade = int(albums[3]*2)
     elif sort == "dates_asc":
       albums = album_repo.display_date_asc()
-      frade = int(albums[4]*2)
+      frade = int(albums[3]*2)
     elif sort == "grades_desc":
       albums = album_repo.display_rating_desc()
-      frade = int(albums[4]*2)
+      frade = int(albums[3]*2)
     elif sort == "grades_asc":
       albums = album_repo.display_rating_desc()
       print("album list:",albums)
-      frade = int(albums[4]*2)
+      frade = int(albums.grade)
     return render_template("albums.html", albums=albums, frade=frade)
     #return redirect("albums.html", albums=albums)
 
