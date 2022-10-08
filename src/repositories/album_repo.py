@@ -52,83 +52,84 @@ def get_albums_by_artist_name(artist_name:str):
 
 #poistetaan jos turha
 def display_albums_home():
-  sql = "SELECT U.username, A.id, A.artist, A.album_name, A.date_added, R.comment, R.grade " \
-        "FROM albums A, users U, reviews R " \
-        "WHERE U.id=A.user_id " \
-        "ORDER BY A.date_added " \
+  sql = "SELECT U.username, A.date_added, A.album_name, A.artist, avg(R.grade) " \
+	      "FROM reviews R " \
+	      "LEFT JOIN albums A ON A.id = R.album_id " \
+	      "LEFT JOIN users U ON A.user_id = U.id " \
+	      "GROUP BY A.album_name, U.username, A.date_added " \
+	      "ORDER BY A.album_name DESC " \
         "LIMIT 10"
-
   result = db.session.execute(sql)
   return result.fetchall()
 
 def display_albums_desc():
-  sql = "SELECT U.username, A.artist, A.album_name, A.date_added, R.comment, R.grade " \
-        "FROM albums A, users U, reviews R " \
-        "WHERE U.id=A.user_id " \
-        "ORDER BY A.album_name DESC"
-        
+  sql = "SELECT U.username, A.date_added, A.album_name, A.artist, avg(R.grade) " \
+	      "FROM reviews R " \
+	      "LEFT JOIN albums A ON A.id = R.album_id " \
+	      "LEFT JOIN users U ON A.user_id = U.id " \
+	      "GROUP BY A.album_name, U.username, A.date_added " \
+	      "ORDER BY A.album_name DESC"
   result = db.session.execute(sql)
   return result.fetchall()
 
 
 def display_albums_asc():
-  sql = "SELECT U.username, A.artist, A.album_name, A.date_added, R.comment, R.grade " \
-        "FROM albums A, users U, reviews R " \
-        "WHERE U.id=A.user_id " \
-        "ORDER BY A.album_name"
-
+  sql = "SELECT U.username, A.date_added, A.album_name, A.artist, avg(R.grade) " \
+	      "FROM reviews R " \
+	      "LEFT JOIN albums A ON A.id = R.album_id " \
+	      "LEFT JOIN users U ON A.user_id = U.id " \
+	      "GROUP BY A.album_name, U.username, A.date_added " \
+	      "ORDER BY A.album_name"
   result = db.session.execute(sql)
   return result.fetchall()
 
 
 def display_artists_desc():
-  sql = "SELECT U.username, A.artist, A.album_name, A.date_added, R.comment, R.grade " \
-        "FROM albums A, users U, reviews R " \
-        "WHERE U.id=A.user_id " \
-        "ORDER BY A.artist DESC"
-
+  sql = "SELECT U.username, A.date_added, A.album_name, A.artist, avg(R.grade) " \
+	      "FROM reviews R " \
+	      "LEFT JOIN albums A ON A.id = R.album_id " \
+	      "LEFT JOIN users U ON A.user_id = U.id " \
+	      "GROUP BY A.album_name, U.username, A.date_added " \
+	      "ORDER BY A.artist DESC"
   result = db.session.execute(sql)
   return result.fetchall()
 
 
 def display_artists_asc():
-  sql = "SELECT U.username, A.artist, A.album_name, A.date_added, R.comment, R.grade " \
-        "FROM albums A, users U, reviews R " \
-        "WHERE U.id=A.user_id " \
-        "ORDER BY A.artist"
-
+  sql = "SELECT U.username, A.date_added, A.album_name, A.artist, avg(R.grade) " \
+	      "FROM reviews R " \
+	      "LEFT JOIN albums A ON A.id = R.album_id " \
+	      "LEFT JOIN users U ON A.user_id = U.id " \
+	      "GROUP BY A.album_name, U.username, A.date_added " \
+	      "ORDER BY A.artist"
   result = db.session.execute(sql)
   return result.fetchall()
 
 
 def display_date_desc():
-  sql = "SELECT U.username, A.artist, A.album_name, A.date_added, R.comment, R.grade " \
-        "FROM albums A, users U, reviews R " \
-        "WHERE U.id=A.user_id " \
-        "ORDER BY A.date_added DESC"
-
+  sql = "SELECT U.username, A.date_added, A.album_name, A.artist, avg(R.grade) " \
+	      "FROM reviews R " \
+	      "LEFT JOIN albums A ON A.id = R.album_id " \
+	      "LEFT JOIN users U ON A.user_id = U.id " \
+	      "GROUP BY A.album_name, U.username, A.date_added " \
+	      "ORDER BY A.date_added DESC"
   result = db.session.execute(sql)
   return result.fetchall()
 
 
 def display_date_asc():
-  sql = "SELECT U.username, A.artist, A.album_name, A.date_added, R.comment, R.grade " \
-        "FROM albums A, users U, reviews R " \
-        "WHERE U.id=A.user_id " \
-        "ORDER BY A.date_added"
-
+  sql = "SELECT U.username, A.date_added, A.album_name, A.artist, avg(R.grade) " \
+	      "FROM reviews R " \
+	      "LEFT JOIN albums A ON A.id = R.album_id " \
+	      "LEFT JOIN users U ON A.user_id = U.id " \
+	      "GROUP BY A.album_name, U.username, A.date_added " \
+	      "ORDER BY A.date_added DESC"
   result = db.session.execute(sql)
   return result.fetchall()
 
-'''
-sun pitää varmaan tos queryssä tehdä 
-GROUP BY U.username, A.artist, A.album_name, A.date_added
-koska sulla on toi 
-AVG(R.grade) aggregation niin noi kaikki muut fieldit pitää olla tossa 
-group by-osiossa
-'''
+
 def display_rating_desc():
-  sql = "SELECT U.username, A.date_added, A.album_name, A.artist, AVG(R.grade) " \
+  sql = "SELECT U.username, A.date_added, A.album_name, A.artist, AVG(R.grade) AS grade " \
 	      "FROM reviews R " \
 	      "LEFT JOIN albums A ON A.id = R.album_id " \
 	      "LEFT JOIN users U ON A.user_id = U.id " \
