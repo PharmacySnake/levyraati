@@ -146,7 +146,7 @@ def sort_albums():
     elif sort == "grades_desc":
       albums = album_repo.display_rating_desc()
     elif sort == "grades_asc":
-      albums = album_repo.display_rating_desc()
+      albums = album_repo.display_rating_asc()
     return render_template("albums.html", albums=albums)
     #return redirect("albums.html", albums=albums)
 

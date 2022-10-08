@@ -145,7 +145,7 @@ def display_rating_asc():
 	      "LEFT JOIN albums A ON A.id = R.album_id " \
 	      "LEFT JOIN users U ON A.user_id = U.id " \
 	      "GROUP BY A.album_name, A.artist, U.username, A.date_added " \
-        "ORDER BY CAST(AVG(R.grade)*2 AS INTEGER)"
+        "ORDER BY AVG(R.grade)"
   result = db.session.execute(sql)
   return result.fetchall()
 
