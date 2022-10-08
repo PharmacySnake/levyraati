@@ -155,6 +155,7 @@ def sort_albums():
       frade = int(albums[4]*2)
     elif sort == "grades_asc":
       albums = album_repo.display_rating_desc()
+      print("album list:",albums)
       frade = int(albums[4]*2)
     return render_template("albums.html", albums=albums, frade=frade)
     #return redirect("albums.html", albums=albums)
