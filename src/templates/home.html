@@ -18,8 +18,9 @@
   <h1>Welcome to Levyraati</h1>
   <h3>New albums</h3>
   {% for album in albums %}
-    <a>{{ imagee }}</a>
+    <!--a>{{ imagee }}</a-->
     <img src="data:;base64, {{ album.cover_img }}" alt=""><br>
+    <img src="data:;base64, {{ imagee }}" alt=""><br>
     <a href="/artist/{{ album.artist }}"">{{ album.artist }}</a><br>
     <a href="/album/{{ album.id }}">{{ album.album_name }}</a><br>
     <a>{{ album.username }}</a><br>
