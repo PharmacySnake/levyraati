@@ -28,11 +28,11 @@ def add_album(artist:str, album_name:str, release_year:int, genre:str, comment:s
     review_repo.add_review(comment, grade, user_id, album_id)
     return True
 
-def get_album_by_id(id:int):
+def get_album_by_id(album_id:int):
   sql = "SELECT user_id, date_added, artist, album_name, release_year, genre " \
         "FROM albums " \
-        "WHERE id=:id"
-  result = db.session.execute(sql, {"id":id})
+        "WHERE id=:album_id"
+  result = db.session.execute(sql, {"id":album_id})
   return result.fetchone()[0]
   #return result.fetchall()
 
