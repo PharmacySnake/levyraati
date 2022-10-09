@@ -20,7 +20,7 @@
   {% for i in range(0, len) %}
     <img src="data:;base64, {{ images[i] }}" alt=""><br>
     <a href="/artist/{{ albums[i].artist }}">{{ albums[i].artist }}</a><br>
-    <a href="/album/{{ albums[i].id }}">{{ albums[i].album_name }}</a><br>
+    <a href="/album/{{ albums[i].album_id }}">{{ albums[i].album_name }}</a><br>
     <a>{{ albums[i].username }}</a><br>
     <i>{{ albums[i].date_added.strftime("%Y-%m-%d %H:%M") }}</i><br><br>
   {% endfor %}
