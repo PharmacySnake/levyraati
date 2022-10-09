@@ -20,6 +20,7 @@
   <img src="data:;base64, {{ cover_image }}" alt=""><br>
   <a>({{ album.release_year }})</a><br>
   <b>{{ album.album_name }}</b>
+
   {% for song in songs %}
     <form action="/thumb" method="POST">
       <a>{{ song.song_name }} {{ song.song_len_min }}:{{ song.song_len_sec }}</a>
@@ -29,9 +30,10 @@
       <input type="hidden" name="user_id" value="{{ album.user_id }}">
       <input type="hidden" name="album_id" value="{{ album.album_id }}">
     </form>
-    
   {% endfor %}
+
   <br>
+
   {% for review in reviews %}
     <a>-----<br>
       grade: {{ review.grade }}<br>
