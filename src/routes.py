@@ -187,7 +187,9 @@ def thumb():
     thumb = request.form["thumb"]
     song_id = request.form["song_id"]
     user_id = request.form["user_id"]
+    album_id = request.form["album_id"]
     thumb_repo.add_thumb(song_id, user_id, thumb)
+  return redirect("/artist/"+str(album_id))
 
 
 @app.route("/artist/<string:artist_name>", methods=["GET"])
@@ -195,7 +197,8 @@ def artist(artist_name:str):
   if request.method == "GET":
     albums = album_repo.get_albums_by_artist_name(artist_name)
     images = encode_images_in_albums(albums)
-    return render_template("artist.html", artist_name=artist_name, albums=albums, images=images, len=len(albums))
+    return render_template("artist.html", artist_name=artist_name, 
+                            albums=albums, images=images, len=len(albums))
   return redirect("/")
 
 
