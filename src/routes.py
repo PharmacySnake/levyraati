@@ -151,7 +151,6 @@ def sort_albums():
       albums = album_repo.display_rating_asc()
     images = encode_images_in_albums(albums)
     return render_template("albums.html", albums=albums, images=images, len=len(albums))
-    #return redirect("albums.html", albums=albums)
 
 
 @app.route("/addreview")#, methods="POST")
