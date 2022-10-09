@@ -184,10 +184,10 @@ def album(album_id:int):
 @app.route("/thumb", methods=["POST"])
 def thumb():
   if request.method == "POST":
-    value = request.form["thumb"]
+    thumb = request.form["thumb"]
     song_id = request.form["song_id"]
     user_id = request.form["user_id"]
-    thumb_repo.add_thumb(song_id, user_id, value)
+    thumb_repo.add_thumb(song_id, user_id, thumb)
 
 
 @app.route("/artist/<string:artist_name>", methods=["GET"])
