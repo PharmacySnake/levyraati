@@ -1,4 +1,3 @@
-#from datetime import datetime
 from db import db
 import services.user_serv as user_serv
 from repositories import image_repo, review_repo, song_repo
@@ -10,11 +9,9 @@ def add_album(artist:str, album_name:str, release_year:int, genre:str, comment:s
     if user_id == 0:
         return False
 
-    #date_added = str(datetime.now())
-    values = {"user_id":user_id, #"date_added":date_added,
-            "artist":artist, "album_name":album_name,
-            "release_year":release_year, "genre":genre,
-            "editable":True, "visible":True}
+    values = {"user_id":user_id, "artist":artist,
+            "album_name":album_name, "release_year":release_year,
+            "genre":genre, "editable":True, "visible":True}
 
     sql = "INSERT INTO albums (user_id, date_added, artist, album_name, release_year, genre, editable, visible) "\
           "VALUES (:user_id, NOW(), :artist, :album_name, :release_year, :genre, :editable, :visible) "\
@@ -31,7 +28,6 @@ def add_album(artist:str, album_name:str, release_year:int, genre:str, comment:s
     review_repo.add_review(comment, grade, user_id, album_id)
     return True
 
-#get username with
 def get_album_by_id(id:int):
   sql = "SELECT user_id, date_added, artist, album_name, release_year, genre " \
         "FROM albums " \
@@ -40,13 +36,15 @@ def get_album_by_id(id:int):
   result = db.session.execute(sql, {"id":id})
   return result.fetchall()
 
-#get username with
 def get_albums_by_artist_name(artist_name:str):
-  sql = "SELECT id, user_id, date_added, artist, album_name, release_year, genre " \
-        "FROM albums " \
-        "WHERE artist=:artist_name"# " \
-        #"GROUP BY album_name"
-
+  sql = "SELECT A.id, A.artist, A.album_name, A.release_year, " \
+               "A.genre, I.cover_img " \
+        "FROM albums A " \
+        "LEFT JOIN Images I ON A.id = I.album_id " \
+        "WHERE artist=:artist_name " \
+        "GROUP BY A.id, A.user_id, A.date_added, A.artist, A.album_name, " \
+                 "A.release_year, A.genre, I.cover_img " \
+        "ORDER BY A.release_year"
   result = db.session.execute(sql, {"artist_name":artist_name})
   return result.fetchall()
 

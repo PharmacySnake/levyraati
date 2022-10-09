@@ -182,8 +182,9 @@ def album(album_id:int):
 @app.route("/artist/<string:artist_name>", methods=["GET"])
 def artist(artist_name:str):
   if request.method == "GET":
-    artist_content = album_repo.get_albums_by_artist_name(artist_name)
-    return render_template("artist.html", artist_name=artist_name, artist=artist_content)
+    albums = album_repo.get_albums_by_artist_name(artist_name)
+    images = encode_images_in_albums(albums)
+    return render_template("artist.html", artist_name=artist_name, albums=albums, images=images, len=len(albums))
   return redirect("/")
 
 
