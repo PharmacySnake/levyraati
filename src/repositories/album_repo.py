@@ -53,36 +53,30 @@ def get_albums_by_artist_name(artist_name:str):
 
 def display_albums_home():
   sql = "SELECT U.username, A.date_added, A.album_name, A.artist, " \
-               "I.cover_img, CAST(AVG(R.grade)*2 AS INTEGER) AS grade " \
+               "I.cover_img, CAST(AVG(R.grade)*2 AS INTEGER) AS grade, " \
+               "A.id " \
 	      "FROM reviews R " \
 	      "LEFT JOIN albums A ON A.id = R.album_id " \
 	      "LEFT JOIN users U ON A.user_id = U.id " \
 	      "LEFT JOIN images I ON A.id = I.album_id " \
-	      "GROUP BY A.album_name, A.artist, U.username, A.date_added, I.cover_img " \
+	      "GROUP BY A.album_name, A.artist, U.username, A.date_added, " \
+                 "I.cover_img, A.id " \
 	      "ORDER BY A.date_added DESC " \
         "LIMIT 10"
-  #cover_image = b64encode(data).decode('utf-8')
-  """
-  sql = "SELECT U.username, A.date_added, A.album_name, A.artist, CAST(AVG(R.grade)*2 AS INTEGER) AS grade " \
-	      "FROM reviews R " \
-	      "LEFT JOIN albums A ON A.id = R.album_id " \
-	      "LEFT JOIN users U ON A.user_id = U.id " \
-	      "GROUP BY A.album_name, A.artist, U.username, A.date_added " \
-	      "ORDER BY A.date_added DESC " \
-        "LIMIT 10"
-  """
   result = db.session.execute(sql)
   return result.fetchall()
 
 
 def display_albums_desc():
   sql = sql = "SELECT U.username, A.date_added, A.album_name, A.artist, " \
-               "I.cover_img, CAST(AVG(R.grade)*2 AS INTEGER) AS grade " \
+               "I.cover_img, CAST(AVG(R.grade)*2 AS INTEGER) AS grade, " \
+               "A.id " \
 	      "FROM reviews R " \
 	      "LEFT JOIN albums A ON A.id = R.album_id " \
 	      "LEFT JOIN users U ON A.user_id = U.id " \
 	      "LEFT JOIN images I ON A.id = I.album_id " \
-	      "GROUP BY A.album_name, A.artist, U.username, A.date_added, I.cover_img " \
+	      "GROUP BY A.album_name, A.artist, U.username, A.date_added, " \
+                 "I.cover_img, A.id " \
 	      "ORDER BY A.album_name DESC"
   result = db.session.execute(sql)
   return result.fetchall()
@@ -90,12 +84,14 @@ def display_albums_desc():
 
 def display_albums_asc():
   sql = "SELECT U.username, A.date_added, A.album_name, A.artist, " \
-               "I.cover_img, CAST(AVG(R.grade)*2 AS INTEGER) AS grade " \
+               "I.cover_img, CAST(AVG(R.grade)*2 AS INTEGER) AS grade, " \
+               "A.id " \
 	      "FROM reviews R " \
 	      "LEFT JOIN albums A ON A.id = R.album_id " \
 	      "LEFT JOIN users U ON A.user_id = U.id " \
 	      "LEFT JOIN images I ON A.id = I.album_id " \
-	      "GROUP BY A.album_name, A.artist, U.username, A.date_added, I.cover_img " \
+	      "GROUP BY A.album_name, A.artist, U.username, A.date_added, " \
+                 "I.cover_img, A.id " \
 	      "ORDER BY A.album_name"
   result = db.session.execute(sql)
   return result.fetchall()
@@ -103,12 +99,14 @@ def display_albums_asc():
 
 def display_artists_desc():
   sql = "SELECT U.username, A.date_added, A.album_name, A.artist, " \
-               "I.cover_img, CAST(AVG(R.grade)*2 AS INTEGER) AS grade " \
+               "I.cover_img, CAST(AVG(R.grade)*2 AS INTEGER) AS grade, " \
+               "A.id " \
 	      "FROM reviews R " \
 	      "LEFT JOIN albums A ON A.id = R.album_id " \
 	      "LEFT JOIN users U ON A.user_id = U.id " \
 	      "LEFT JOIN images I ON A.id = I.album_id " \
-	      "GROUP BY A.album_name, A.artist, U.username, A.date_added, I.cover_img " \
+	      "GROUP BY A.album_name, A.artist, U.username, A.date_added, " \
+                 "I.cover_img, A.id " \
 	      "ORDER BY A.artist DESC"
   result = db.session.execute(sql)
   return result.fetchall()
@@ -116,12 +114,14 @@ def display_artists_desc():
 
 def display_artists_asc():
   sql = "SELECT U.username, A.date_added, A.album_name, A.artist, " \
-               "I.cover_img, CAST(AVG(R.grade)*2 AS INTEGER) AS grade " \
+               "I.cover_img, CAST(AVG(R.grade)*2 AS INTEGER) AS grade, " \
+               "A.id " \
 	      "FROM reviews R " \
 	      "LEFT JOIN albums A ON A.id = R.album_id " \
 	      "LEFT JOIN users U ON A.user_id = U.id " \
 	      "LEFT JOIN images I ON A.id = I.album_id " \
-	      "GROUP BY A.album_name, A.artist, U.username, A.date_added, I.cover_img " \
+	      "GROUP BY A.album_name, A.artist, U.username, A.date_added, " \
+                 "I.cover_img, A.id " \
 	      "ORDER BY A.artist"
   result = db.session.execute(sql)
   return result.fetchall()
@@ -129,12 +129,14 @@ def display_artists_asc():
 
 def display_date_desc():
   sql = "SELECT U.username, A.date_added, A.album_name, A.artist, " \
-               "I.cover_img, CAST(AVG(R.grade)*2 AS INTEGER) AS grade " \
+               "I.cover_img, CAST(AVG(R.grade)*2 AS INTEGER) AS grade, " \
+               "A.id " \
 	      "FROM reviews R " \
 	      "LEFT JOIN albums A ON A.id = R.album_id " \
 	      "LEFT JOIN users U ON A.user_id = U.id " \
 	      "LEFT JOIN images I ON A.id = I.album_id " \
-	      "GROUP BY A.album_name, A.artist, U.username, A.date_added, I.cover_img " \
+	      "GROUP BY A.album_name, A.artist, U.username, A.date_added, " \
+                 "I.cover_img, A.id " \
 	      "ORDER BY A.date_added DESC"
   result = db.session.execute(sql)
   return result.fetchall()
@@ -142,12 +144,14 @@ def display_date_desc():
 
 def display_date_asc():
   sql = "SELECT U.username, A.date_added, A.album_name, A.artist, " \
-               "I.cover_img, CAST(AVG(R.grade)*2 AS INTEGER) AS grade " \
+               "I.cover_img, CAST(AVG(R.grade)*2 AS INTEGER) AS grade, " \
+               "A.id " \
 	      "FROM reviews R " \
 	      "LEFT JOIN albums A ON A.id = R.album_id " \
 	      "LEFT JOIN users U ON A.user_id = U.id " \
 	      "LEFT JOIN images I ON A.id = I.album_id " \
-	      "GROUP BY A.album_name, A.artist, U.username, A.date_added, I.cover_img " \
+	      "GROUP BY A.album_name, A.artist, U.username, A.date_added, " \
+                 "I.cover_img, A.id " \
 	      "ORDER BY A.date_added"
   result = db.session.execute(sql)
   return result.fetchall()
@@ -155,12 +159,14 @@ def display_date_asc():
 
 def display_rating_desc():
   sql = "SELECT U.username, A.date_added, A.album_name, A.artist, " \
-               "I.cover_img, CAST(AVG(R.grade)*2 AS INTEGER) AS grade " \
+               "I.cover_img, CAST(AVG(R.grade)*2 AS INTEGER) AS grade, " \
+               "A.id " \
 	      "FROM reviews R " \
 	      "LEFT JOIN albums A ON A.id = R.album_id " \
 	      "LEFT JOIN users U ON A.user_id = U.id " \
 	      "LEFT JOIN images I ON A.id = I.album_id " \
-	      "GROUP BY A.album_name, A.artist, U.username, A.date_added, I.cover_img " \
+	      "GROUP BY A.album_name, A.artist, U.username, A.date_added, " \
+                 "I.cover_img, A.id " \
         "ORDER BY AVG(R.grade) DESC"
   result = db.session.execute(sql)
   return result.fetchall()
@@ -168,12 +174,14 @@ def display_rating_desc():
 
 def display_rating_asc():
   sql = "SELECT U.username, A.date_added, A.album_name, A.artist, " \
-               "I.cover_img, CAST(AVG(R.grade)*2 AS INTEGER) AS grade " \
+               "I.cover_img, CAST(AVG(R.grade)*2 AS INTEGER) AS grade, " \
+               "A.id " \
 	      "FROM reviews R " \
 	      "LEFT JOIN albums A ON A.id = R.album_id " \
 	      "LEFT JOIN users U ON A.user_id = U.id " \
 	      "LEFT JOIN images I ON A.id = I.album_id " \
-	      "GROUP BY A.album_name, A.artist, U.username, A.date_added, I.cover_img " \
+	      "GROUP BY A.album_name, A.artist, U.username, A.date_added, " \
+                 "I.cover_img, A.id " \
         "ORDER BY AVG(R.grade)"
   result = db.session.execute(sql)
   return result.fetchall()
