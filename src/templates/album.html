@@ -18,9 +18,11 @@
   <br><br>
   <h3>{{ album.artist }}</h3><br>
   <img src="data:;base64, {{ cover_image }}" alt=""><br>
-  <a>({{ album.release_year }})</a><br>
-  <b>{{ album.album_name }}</b><br>
+  <a>release year: ({{ album.release_year }})</a><br>
+  <b>album name: {{ album.album_name }}</b><br>
   <b>user id: {{ album.user_id }}</b>
+  <a>date added: {{ album.date_added }}</a>
+  <a>genre: {{ album.genre }}</a>
   <!--b>user id: {{ user_id }}</b-->
 
   {% for song in songs %}
