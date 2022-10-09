@@ -30,20 +30,20 @@
     <button type="submit">submit</button>
   </form>
   
-  {% for album in albums %}
-    <a>Image would go here</a><br>
+  {% for i in range(0, len) %}
+    <img src="data:;base64, {{ images[i] }}" alt=""><br>
     <a>Rating: [</a>
-    {% for i in range(0, album.grade) %}
+    {% for j in range(0, album.grade) %}
       <a>|</a>
     {% endfor %}
-    {% for i in range(0, (10 - album.grade)) %}
+    {% for j in range(0, (10 - album.grade)) %}
       <a>·</a>
     {% endfor %}
     <a>]</a><br>
-    <a href="/artist/{{ album.artist }}">{{ album.artist }}</a><br>
-    <a href="/album/{{ album.id }}">{{ album.album_name }}</a><br>
-    <a>{{ album.username }}</a><br>
-    <i>{{ album.date_added.strftime("%Y-%m-%d %H:%M") }}</i><br><br>
+    <a href="/artist/{{ albums[i].artist }}">{{ albums[i].artist }}</a><br>
+    <a href="/album/{{ albums[i].id }}">{{ albums[i].album_name }}</a><br>
+    <a>{{ albums[i].username }}</a><br>
+    <i>{{ albums[i].date_added.strftime("%Y-%m-%d %H:%M") }}</i><br><br>
   {% endfor %}
 
 </body>

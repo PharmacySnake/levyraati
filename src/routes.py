@@ -8,25 +8,7 @@ from services import user_serv
 @app.route("/")
 def home():
   albums = album_repo.display_albums_home()
-  #imagee = albums[1].cover_img
-  modified_album = []
-  modified_part = []
-  images = []
-
-  #for i in range(len(albums)):
-    #newalbums[i] = albums[i]
-  for part in albums:
-    #print(message[0], message[1])
-    #print(message.id, message.content)
-    #print(message["id"], message["content"])
-    modified_part = list(part)
-    modified_image  = part.cover_img
-    modified_image = b64encode(modified_image).decode('utf-8')
-    #modified_part[4] = modified_image
-    #modified_album.append(tuple(modified_part))
-    images.append(modified_image)
-  #albums = modified_album[:]
-  #imagee = b64encode(data).decode('utf-8')
+  images = encode_images_in_albums(albums)
   return render_template("home.html", albums=albums, images=images, len=len(albums))#, imagee=imagee)
 
 
@@ -167,7 +149,8 @@ def sort_albums():
       albums = album_repo.display_rating_desc()
     elif sort == "grades_asc":
       albums = album_repo.display_rating_asc()
-    return render_template("albums.html", albums=albums)
+    images = encode_images_in_albums(albums)
+    return render_template("albums.html", albums=albums, images=images len=len(albums))
     #return redirect("albums.html", albums=albums)
 
 
@@ -203,3 +186,12 @@ def artist(artist_name:str):
     artist_content = album_repo.get_albums_by_artist_name(artist_name)
     return render_template("artist.html", artist_name=artist_name, artist=artist_content)
   return redirect("/")
+
+
+def encode_images_in_albums(albums_data):
+  encoded_images = []
+  for image in albums_data:
+    modified_image  = image.cover_img
+    modified_image = b64encode(modified_image).decode('utf-8')
+    encoded_images.append(modified_image)
+  return encoded_images
