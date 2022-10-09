@@ -52,5 +52,5 @@
     id SERIAL PRIMARY KEY,
     song_id INTEGER REFERENCES Songs,
     user_id INTEGER REFERENCES Users,
-    thumb BOOLEAN
+    thumb INTEGER
   );
