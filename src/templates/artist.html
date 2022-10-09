@@ -20,10 +20,9 @@
   <a>-----</a><br>
   {% for i in range(0, len) %}
     <img src="data:;base64, {{ images[i] }}" alt=""><br>
-    <a>{{ albums[i].release_year }}</a>
-    <a>{{ albums[i].genre }}</a>
-    <a href="/album/{{ albums[i].id }}">{{ albums[i].album_name }}</a><br>
     <a>({{ albums[i].release_year }})</a><br>
+    <a>{{ albums[i].genre }}</a><br>
+    <a href="/album/{{ albums[i].id }}">{{ albums[i].album_name }}</a><br>
     <a>-----</a><br>
   {% endfor %}
 
