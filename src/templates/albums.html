@@ -33,10 +33,10 @@
   {% for i in range(0, len) %}
     <img src="data:;base64, {{ images[i] }}" alt=""><br>
     <a>Rating: [</a>
-    {% for j in range(0, album.grade) %}
+    {% for j in range(0, albums[i].grade) %}
       <a>|</a>
     {% endfor %}
-    {% for j in range(0, (10 - album.grade)) %}
+    {% for j in range(0, (10 - albums[i].grade)) %}
       <a>·</a>
     {% endfor %}
     <a>]</a><br>
