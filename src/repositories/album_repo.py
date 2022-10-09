@@ -32,7 +32,6 @@ def get_album_by_id(id:int):
   sql = "SELECT user_id, date_added, artist, album_name, release_year, genre " \
         "FROM albums " \
         "WHERE id=:id"
-
   result = db.session.execute(sql, {"id":id})
   return result.fetchall()
 
