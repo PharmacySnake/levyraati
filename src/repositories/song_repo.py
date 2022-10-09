@@ -23,7 +23,7 @@ def add_songs(songs:list, song_length:dict, album_id:int):
     db.session.commit()
 
 def get_songs_by_album_id(album_id:int):
-  sql = "SELECT song_name, song_len_min, song_len_sec " \
+  sql = "SELECT id, song_name, song_len_min, song_len_sec " \
         "FROM songs " \
         "WHERE album_id=:album_id"
   result = db.session.execute(sql, {"album_id":album_id})

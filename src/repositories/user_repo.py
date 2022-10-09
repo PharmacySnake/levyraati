@@ -5,7 +5,6 @@ import secrets
 
 
 def register(username:str, password:str, admin:bool):
-  print("register")
   try:
     hash_value = generate_password_hash(password)
     values = {"username":username, "passwrd":hash_value, "is_admin":admin}

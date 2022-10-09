@@ -1,7 +1,9 @@
 from base64 import b64encode
 from app import app
-from flask import render_template, redirect, request, session, make_response, flash
-from repositories import image_repo, review_repo, song_repo, user_repo, album_repo
+from flask import render_template, redirect, request, session, \
+                  make_response, flash
+from repositories import image_repo, review_repo, song_repo, \
+                         user_repo, album_repo, thumb_repo
 from services import user_serv
 
 
@@ -177,6 +179,14 @@ def album(album_id:int):
     review_repo.add_review(comment, grade, user_serv.user_id(), album_id)
     return redirect("/album/"+str(album_id))
   return redirect("/")
+
+
+@app.route("/thumb", methods=["POST"])
+def thumb():
+  if request.method == "POST":
+    request.form["thumb"]
+    request.form[]
+    thumb_repo.add_thumb()
 
 
 @app.route("/artist/<string:artist_name>", methods=["GET"])

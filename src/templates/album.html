@@ -16,15 +16,19 @@
   <a href="/albums">Browse albums and reviews</a><br>
   
   <br><br>
-  {% for nfo in album %}
-    <i>{{ nfo.artist }}</i><br>
-    <b>{{ nfo.album_name }}</b>
-    <a>({{ nfo.release_year }})</a><br>
-  {% endfor %}
-
+  <h3>{{ album.artist }}</h3><br>
   <img src="data:;base64, {{ cover_image }}" alt=""><br>
+  <a>({{ album.release_year }})</a><br>
+  <b>{{ album.album_name }}</b>
   {% for song in songs %}
-    <a>{{ song.song_name }} {{ song.song_len_min }}:{{ song.song_len_sec }}</a><br>
+    <form action="/thumb" method="POST">
+      <a>{{ song.song_name }} {{ song.song_len_min }}:{{ song.song_len_sec }}</a>
+      <input type="submit" name="thumb" value="1">
+      <input type="submit" name="thumb" value="-1"><br>
+      <input type="hidden" name="song_id" value="{{ song.id }}">
+      <input type="hidden" name="user_id" value="{{ album.user_id }}">
+    </form>
+    
   {% endfor %}
   <br>
   {% for review in reviews %}
