@@ -4,8 +4,6 @@ from flask import make_response
 
 
 def add_cover_image(cover_image, album_id:int):
-  #print(cover_image)
-  #print(3)
   values = {"cover_img":cover_image, "album_id":album_id,
             "visible":True}
   sql = "INSERT INTO images (cover_img, album_id, visible) " \
@@ -22,6 +20,7 @@ def get_cover_image(album_id:int):
   data = result.fetchone()[0]
   cover_image = b64encode(data).decode('utf-8')
   return cover_image
+
 
 def change_cover_image(image_id:int, cover_image):
   print("change cover image")

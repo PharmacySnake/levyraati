@@ -30,9 +30,9 @@ def add_album(artist:str, album_name:str, release_year:int, genre:str, comment:s
 
 def get_album_by_id(album_id:int):
   #values = {"id":album_id}
-  sql = "SELECT user_id, date_added, artist, album_name, release_year, genre " \
-        "FROM albums " \
-        "WHERE id=:album_id"
+  sql = "SELECT A.user_id, A.date_added, A.artist, A.album_name, A.release_year, A.genre " \
+        "FROM albums A" \
+        "WHERE A.id=:album_id"
   result = db.session.execute(sql, {"id":album_id})
   #return result.fetchone()[0]
   return result.fetchall()
