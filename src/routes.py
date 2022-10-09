@@ -165,6 +165,7 @@ def addreview():
 @app.route("/album/<int:album_id>", methods=["GET", "POST"])
 def album(album_id:int):
   if request.method == "GET":
+    album_id = int(album_id)
     album_content = album_repo.get_album_by_id(album_id)
     #user_id = album_content.user_id
     cover_image = image_repo.get_cover_image(album_id)
