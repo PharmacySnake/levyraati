@@ -166,7 +166,7 @@ def addreview():
 def album(album_id:int):
   if request.method == "GET":
     album_content = album_repo.get_album_by_id(album_id)
-    user_id = int(album_content[0])
+    user_id = int(album_content[0][0])
     cover_image = image_repo.get_cover_image(album_id)
     song_content = song_repo.get_songs_by_album_id(album_id)
     reviews_content = review_repo.get_reviews_by_id(album_id)
