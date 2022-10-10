@@ -39,11 +39,11 @@ def get_album_by_id(album_id:int):
         SELECT A.user_id, A.date_added, A.artist, A.album_name,
                A.release_year, A.genre
         FROM albums A
-        WHERE A.id=%s
+        WHERE A.id=%(album_id)s
         """
   #result = db.session.execute(sql, {"id":album_id})
   #result = db.session.execute(sql, values)
-  result = db.session.execute(sql, [album_id])
+  result = db.session.execute(sql, {"album_id":album_id})
   return result.fetchone()[0]
   #return result.fetchall()
 
