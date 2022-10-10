@@ -12,7 +12,7 @@ def get_thumbs_for_songs(album_id:int):
   sql = """ 
 	      SELECT song_id, CAST(AVG(thumb)*5 AS INTEGER) AS thumb, user_id 
 	      FROM thumbs 
-	      LEFT JOIN songs ON songs.id = T.song_id 
+	      LEFT JOIN songs ON songs.id = song_id 
 	      WHERE songs.album_id=:album_id
 	      GROUP BY song_id, user_id
         """
