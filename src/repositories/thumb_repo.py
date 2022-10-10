@@ -10,7 +10,7 @@ def add_thumb(song_id:int, user_id:int, thumb:int):
 
 def get_thumbs_for_songs(album_id:int):
   sql = """ 
-        SELECT song_id, CAST(AVG(thumb)*5) AS INTEGER) AS thumb
+        SELECT song_id, CAST(AVG(thumb)*5 AS INTEGER) AS thumb
         FROM thumbs
         WHERE album_id=:album_id
         GROUP BY song_id
