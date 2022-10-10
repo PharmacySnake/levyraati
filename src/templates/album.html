@@ -28,12 +28,18 @@
     <form action="/thumb" method="POST">
       <a>{{ songs[i].song_name }} - {{ songs[i].song_len_min }}min {{ songs[i].song_len_sec }}sec</a>
       <a> [</a>
-      {% for j in range(0, thumbs[i].thumb) %}
-        <a>|</a>
-      {% endfor %}
-      {% for j in range(0, (5 - thumbs[i].thumb)) %}
-        <a>·</a>
-      {% endfor %}
+      {% if thumbs %}
+        {% for j in range(0, thumbs[i].thumb) %}
+          <a>|</a>
+        {% endfor %}
+        {% for j in range(0, (5 - thumbs[i].thumb)) %}
+          <a>·</a>
+        {% endfor %}
+      {% else %}
+        {% for j in range(0, 5) %}
+          <a>·</a>
+        {% endfor %}
+      {% endif %}
       <a>] </a>
       <button type="submit" name="thumb" value="1">_b👍🖒</button>
       <button type="submit" name="thumb" value="-1">⎻p👎🖓</button><br>
