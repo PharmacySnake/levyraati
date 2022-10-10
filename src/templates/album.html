@@ -24,7 +24,6 @@
   <a>date added: {{ album.date_added }}</a><br>
   <a>genre: {{ album.genre }}</a><br>
 
-  {% for song in songs %}
   {% for i in range(0, songs_len) %}
     <form action="/thumb" method="POST">
       <a>{{ songs[i].song_name }} - {{ songs[i].song_len_min }}min {{ songs[i].song_len_sec }}sec</a>
