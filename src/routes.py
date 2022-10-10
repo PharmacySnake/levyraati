@@ -190,7 +190,7 @@ def thumb():
     user_id = request.form["user_id"]
     album_id = request.form["album_id"]
     thumb_repo.add_thumb(song_id, user_id, thumb)
-  return redirect("/album/"+str(album_id))
+  return render_template("/album/"+str(album_id))
 
 
 @app.route("/artist/<string:artist_name>", methods=["GET"])
