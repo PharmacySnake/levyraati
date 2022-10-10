@@ -27,12 +27,12 @@
   {% for song in songs %}
     <form action="/thumb" method="POST">
       <a>{{ song.song_name }} {{ song.song_len_min }}:{{ song.song_len_sec }}</a>
-      <button type="submit" name="thumb" value="1">👍</button>
-      <button type="submit" name="thumb" value="-1">👎</button><br>
-      <a>sid: {{ song.id }}, uid: {{ album.user_id }}, aid: {{ album.album_id }}</a><br>
+      <button type="submit" name="thumb" value="1">👍🖒</button>
+      <button type="submit" name="thumb" value="-1">👎🖓</button><br>
+      <a>sid: {{ song.id }}, uid: {{ album.user_id }}, aid: {{ album.id }}</a><br>
       <input type="hidden" name="song_id" value="{{ song.id }}">
       <input type="hidden" name="user_id" value="{{ album.user_id }}">
-      <input type="hidden" name="album_id" value="{{ album.album_id }}">
+      <input type="hidden" name="album_id" value="{{ album.id }}">
     </form>
   {% endfor %}
 

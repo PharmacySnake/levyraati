@@ -28,7 +28,7 @@ def add_album(artist:str, album_name:str, release_year:int, genre:str, comment:s
     return True
 
 def get_album_by_id(album_id:int):
-  sql = "SELECT CAST(A.id) AS album_id, A.user_id, A.date_added, A.artist, A.album_name, " \
+  sql = "SELECT A.id, A.user_id, A.date_added, A.artist, A.album_name, " \
                "A.release_year, A.genre " \
         "FROM albums A " \
         "WHERE A.id=:album_id"
