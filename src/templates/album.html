@@ -16,13 +16,13 @@
   <a href="/albums">Browse albums and reviews</a><br>
   
   <br><br>
-  <h3>{{ album.artist }}</h3><br>
+  <h3>{{ album[0].artist }}</h3><br>
   <img src="data:;base64, {{ cover_image }}" alt=""><br>
-  <a>release year: ({{ album.release_year }})</a><br>
-  <b>album name: {{ album.album_name }}</b><br>
-  <b>user id: {{ album.user_id }}</b><br>
-  <a>date added: {{ album.date_added }}</a><br>
-  <a>genre: {{ album.genre }}</a><br>
+  <a>release year: ({{ album[0].release_year }})</a><br>
+  <b>album name: {{ album[0].album_name }}</b><br>
+  <b>user id: {{ album[0].user_id }}</b><br>
+  <a>date added: {{ album[0].date_added }}</a><br>
+  <a>genre: {{ album[0].genre }}</a><br>
   <i>user id: {{ user_id }}</i>
 
   {% for song in songs %}
