@@ -20,9 +20,7 @@ def add_album(artist:str, album_name:str, release_year:int, genre:str, comment:s
     result = db.session.execute(sql, values)
     db.session.commit()
     album_id = result.fetchone()[0]
-    print("a_id", album_id)
     if len(cover_image) > 0:
-      print("here in the image place")
       image_repo.add_cover_image(cover_image, album_id)
     if len(songs) > 0:
       song_repo.add_songs(songs, songs_length, album_id)
@@ -41,11 +39,11 @@ def get_album_by_id(album_id:int):
         SELECT A.user_id, A.date_added, A.artist, A.album_name,
                A.release_year, A.genre
         FROM albums A
-        WHERE A.id=:album_id
+        WHERE A.id=%s
         """
   #result = db.session.execute(sql, {"id":album_id})
   #result = db.session.execute(sql, values)
-  result = db.session.execute(text(sql), values)
+  result = db.session.execute(sql, [album_id])
   return result.fetchone()[0]
   #return result.fetchall()
 
