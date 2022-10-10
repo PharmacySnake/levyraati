@@ -33,8 +33,8 @@ def get_album_by_id(album_id:int):
         "FROM albums A " \
         "WHERE A.id=:album_id"
   result = db.session.execute(sql, {"album_id":album_id})
-  #return result.fetchone()[0]
-  return result.fetchall()
+  return result.fetchone()[0]
+  #return result.fetchall()
 
 def get_albums_by_artist_name(artist_name:str):
   sql = "SELECT A.id, A.artist, A.album_name, A.release_year, " \
