@@ -28,24 +28,12 @@ def add_album(artist:str, album_name:str, release_year:int, genre:str, comment:s
     return True
 
 def get_album_by_id(album_id:int):
-  #values = {"id":album_id}
-  """
   sql = "SELECT A.user_id, A.date_added, A.artist, A.album_name, " \
                "A.release_year, A.genre " \
         "FROM albums A " \
         "WHERE A.id=:album_id"
-  """
-  sql = """
-        SELECT A.user_id, A.date_added, A.artist, A.album_name,
-               A.release_year, A.genre
-        FROM albums A
-        WHERE A.id=:album_id
-        """
-  #result = db.session.execute(sql, {"id":album_id})
-  #result = db.session.execute(sql, values)
   result = db.session.execute(sql, {"album_id":album_id})
   return result.fetchone()[0]
-  #return result.fetchall()
 
 def get_albums_by_artist_name(artist_name:str):
   sql = "SELECT A.id, A.artist, A.album_name, A.release_year, " \

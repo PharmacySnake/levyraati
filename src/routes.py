@@ -166,11 +166,11 @@ def addreview():
 def album(album_id:int):
   if request.method == "GET":
     album_content = album_repo.get_album_by_id(album_id)
-    #user_id = album_content.user_id
+    user_id = album_content.user_id
     cover_image = image_repo.get_cover_image(album_id)
     song_content = song_repo.get_songs_by_album_id(album_id)
     reviews_content = review_repo.get_reviews_by_id(album_id)
-    return render_template("album.html", album=album_content, cover_image=cover_image, songs=song_content, reviews=reviews_content)#, user_id=user_id)
+    return render_template("album.html", album=album_content, cover_image=cover_image, songs=song_content, reviews=reviews_content, user_id=user_id)
 
   elif request.method == "POST":
     comment = request.form["comment"]
