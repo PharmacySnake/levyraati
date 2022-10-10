@@ -23,12 +23,11 @@
   <b>user id: {{ album.user_id }}</b><br>
   <a>date added: {{ album.date_added }}</a><br>
   <a>genre: {{ album.genre }}</a><br>
-  <i>user id: {{ user_id }}</i>
 
   {% for song in songs %}
     <form action="/thumb" method="POST">
       <a>{{ song.song_name }} {{ song.song_len_min }}:{{ song.song_len_sec }}</a>
-      <input type="submit" name="thumb" value="1">
+      <button type="submit" name="thumb" value="1">👍</button>
       <input type="submit" name="thumb" value="-1"><br>
       <input type="hidden" name="song_id" value="{{ song.id }}">
       <input type="hidden" name="user_id" value="{{ album.user_id }}">
