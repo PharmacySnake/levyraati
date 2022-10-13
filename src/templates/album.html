@@ -39,8 +39,13 @@
           <a>·····</a>
       {% endif %}
       <a>] </a>
+
       <button type="submit" name="thumb" value="1">🡅</button>
-      <a>{{ thumbs[i].thum_pos }}/{{ thumbs[i].thum_neg }}</a>
+      {% if thumbs[i] %}
+        <a>{{ thumbs[i].thum_pos }}/-{{ thumbs[i].thum_neg }}</a>
+      {% else %}
+        <a>0/0</a>
+      {% endif %}
       <button type="submit" name="thumb" value="-1">🡇</button><br>
       <input type="hidden" name="song_id" value="{{ songs[i].id }}">
       <input type="hidden" name="user_id" value="{{ album.user_id }}">
