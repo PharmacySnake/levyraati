@@ -6,7 +6,7 @@
 
 <body>
   {% if session.user_id %}
-    <a href="/logout">Logout</a>
+    <a href="/logout">Logout</a><br>
     <a href="/addalbum">Add a new album and review</a><br>
   {% else %}
     <a href="/login">Login</a><br>
@@ -28,7 +28,7 @@
     <form action="/thumb" method="POST">
       <a>{{ songs[i].song_name }} - {{ songs[i].song_len_min }}min {{ songs[i].song_len_sec }}sec</a>
       <a> [</a>
-      {% if thumbs %}
+      {% if thumbs or thumbs[i].thumb < 0 %}
         {% for j in range(0, thumbs[i].thumb) %}
           <a>|</a>
         {% endfor %}
@@ -36,9 +36,7 @@
           <a>·</a>
         {% endfor %}
       {% else %}
-        {% for j in range(0, 5) %}
-          <a>·</a>
-        {% endfor %}
+          <a>·····</a>
       {% endif %}
       <a>] </a>
       <button type="submit" name="thumb" value="1">_b👍🖒</button>
