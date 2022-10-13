@@ -41,10 +41,10 @@ def register():
     username = request.form["username"]
     password1 = request.form["password1"]
     password2 = request.form["password2"]
-    admin = False
-    
-    if request.form["admin"]:
-      admin = True
+    try:
+      admin = request.form["admin"]
+    except:
+      admin = False
     
     if len(username) < 1:
       return render_template("register.html", message_user="Username is too short.\nUsername has to be between one (1) and twentytwo (22) characters.\n")
