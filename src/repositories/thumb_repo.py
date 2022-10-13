@@ -9,13 +9,21 @@ def add_thumb(song_id:int, user_id:int, thumb:int):
 
 
 def get_thumbs_for_songs(album_id:int):
-  sql = """ 
-	      SELECT song_id, CAST(AVG(thumb)*5 AS INTEGER) AS thumb, user_id 
-	      FROM thumbs 
-	      LEFT JOIN songs ON songs.id = song_id 
-	      WHERE songs.album_id=:album_id
-	      GROUP BY song_id, user_id
-        """
+  sql = "SELECT song_id, user_id, " \
+        "COUNT(CASE WHEN thumb < 0 THEN -1 ELSE NULL END) AS thum_neg, " \
+	      "COUNT(CASE WHEN thumb > 0 THEN 1 ELSE NULL END) AS thum_pos, " \
+	      "CAST(AVG(thumb)*5 AS INTEGER) AS thumb " \
+	      "FROM thumbs " \
+	      "LEFT JOIN songs ON songs.id = song_id " \
+	      "WHERE songs.album_id='3' " \
+	      "GROUP BY song_id, user_id"
+        #""" 
+	      #SELECT song_id, CAST(AVG(thumb)*5 AS INTEGER) AS thumb, user_id 
+	      #FROM thumbs 
+	      #LEFT JOIN songs ON songs.id = song_id 
+	      #WHERE songs.album_id=:album_id
+	      #GROUP BY song_id, user_id
+        #"""
   result = db.session.execute(sql, {"album_id":album_id})
   return result.fetchall()
 
