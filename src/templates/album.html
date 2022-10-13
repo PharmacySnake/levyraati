@@ -28,7 +28,7 @@
     <form action="/thumb" method="POST">
       <a>{{ songs[i].song_name }} - {{ songs[i].song_len_min }}min {{ songs[i].song_len_sec }}sec</a>
       <a> [</a>
-      {% if thumbs[i].thumb > 0 %}
+      {% if thumbs and thumbs[i].thumb > 0 %}
         {% for j in range(0, thumbs[i].thumb) %}
           <a>|</a>
         {% endfor %}
