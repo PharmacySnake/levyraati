@@ -40,7 +40,7 @@
       {% endif %}
       <a>] </a>
       <button type="submit" name="thumb" value="1">🡅</button>
-      <a>positive thumbs count/negative thumbs count</a>
+      <a>{{ thumbs[i].thum_pos }}/{{ thumbs[i].thum_neg }}</a>
       <button type="submit" name="thumb" value="-1">🡇</button><br>
       <input type="hidden" name="song_id" value="{{ songs[i].id }}">
       <input type="hidden" name="user_id" value="{{ album.user_id }}">
