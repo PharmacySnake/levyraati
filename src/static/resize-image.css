@@ -2,7 +2,7 @@ img{
   height: 512px;
   width: auto;
 }
-/*.cat {
-  height: 512px;
-  width: 512px;
-}*/
+
+.center{
+  align-items: center;
+}
