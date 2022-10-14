@@ -177,23 +177,27 @@ def album(album_id:int):
                             songs_len=len(song_content))
 
   elif request.method == "POST":
-    comment = request.form["comment"]
-    if len(comment) > 5000:
+    token = request.form["csrf_token"]
+    if user_serv.check_token(token):
+      comment = request.form["comment"]
+      if len(comment) > 5000:
         return render_template("album.html", message_comment=" Review cannot be longer than five thousand (5000) characters.")
-    grade = request.form["grade"]
-    review_repo.add_review(comment, grade, user_serv.user_id(), album_id)
-    return redirect("/album/"+str(album_id))
+      grade = request.form["grade"]
+      review_repo.add_review(comment, grade, user_serv.user_id(), album_id)
+      return redirect("/album/"+str(album_id))
   return redirect("/")
 
 
 @app.route("/thumb", methods=["POST"])
 def thumb():
   if request.method == "POST":
-    thumb = request.form["thumb"]
-    song_id = request.form["song_id"]
-    user_id = request.form["user_id"]
-    album_id = request.form["album_id"]
-    thumb_repo.add_thumb(song_id, user_id, thumb)
+    token = request.form["csrf_token"]
+    if user_serv.check_token(token):
+      thumb = request.form["thumb"]
+      song_id = request.form["song_id"]
+      user_id = request.form["user_id"]
+      album_id = request.form["album_id"]
+      thumb_repo.add_thumb(song_id, user_id, thumb)
   return redirect("/album/"+str(album_id))
 
 

@@ -22,7 +22,9 @@
   {% endif %}
   <h3>{{ album.artist }}</h3><br>
   <b>{{ album.album_name }}</b><br>
-  <img src="data:;base64, {{ cover_image }}" alt=""><br>
+  <div class="cat">
+    <img src="data:;base64, {{ cover_image }}" alt=""><br>
+  </div>
   <a>({{ album.release_year }})</a><br>
   <!--b>user id: {{ album.user_id }}</b><br>
   <a>date added: {{ album.date_added }}</a><br-->

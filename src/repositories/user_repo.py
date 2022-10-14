@@ -51,6 +51,7 @@ def promote_user_to_admin(user_id:int):
     return True
   return False
 
+
 def demote_user_from_admin(user_id:int):
   if user_exists(user_id):
     sql = "UPDATE users SET is_admin=false where id=:user_id"
@@ -59,9 +60,12 @@ def demote_user_from_admin(user_id:int):
     return True
   return False
 
+
 def user_exists(user_id:int):
   sql = "SELECT id FROM users WHERE id=:user_id"
   result = db.session.execute(sql, {"user_id":user_id})
   if not result:
     return False
   return True
+
+

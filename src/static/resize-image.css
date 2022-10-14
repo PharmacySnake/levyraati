@@ -1,0 +1,9 @@
+img {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.cat {
+  height: 512px;
+  width: 512px;
+}
