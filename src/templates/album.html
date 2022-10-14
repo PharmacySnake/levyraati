@@ -14,8 +14,12 @@
   {% endif %}
   <a href="/">Go back to front page</a><br>
   <a href="/albums">Browse albums and reviews</a><br>
-  
+  <hr>
+
   <br><br>
+  {% if session.admin %}
+    <h4>admin in the house</h4>
+  {% endif %}
   <h3>{{ album.artist }}</h3><br>
   <b>{{ album.album_name }}</b><br>
   <img src="data:;base64, {{ cover_image }}" alt=""><br>
@@ -41,15 +45,11 @@
       <a>] </a>
 
       <button type="submit" name="thumb" value="1">🡅</button>
-      {% if thumbs[i] %}
-        <a>{{ thumbs[i].thum_pos }}/-{{ thumbs[i].thum_neg }}</a>
-      {% else %}
-        <a>0/0</a>
-      {% endif %}
       <button type="submit" name="thumb" value="-1">🡇</button><br>
       <input type="hidden" name="song_id" value="{{ songs[i].id }}">
       <input type="hidden" name="user_id" value="{{ album.user_id }}">
       <input type="hidden" name="album_id" value="{{ album.id }}">
+      <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     </form>
   {% endfor %}
 
@@ -62,18 +62,22 @@
       user: {{ review.username }}<br>
     </a>-----<br>
   {% endfor %}
-  <form method="POST" enctype="multipart/form-data">
-    <a>Grade</a><br>
-    <a>- 1 - 2 - 3 - 4 - 5 -</a><br>
-    <input type="radio" name="grade" value="1" checked>
-    <input type="radio" name="grade" value="2" checked>
-    <input type="radio" name="grade" value="3" checked>
-    <input type="radio" name="grade" value="4" checked>
-    <input type="radio" name="grade" value="5" checked><br><br>
-    <a>Review album:</a><br>
-    <textarea name="comment" rows="5" cols="60"></textarea>{{ message_comment }}<br>
-
-    <input type="submit" value="Add review">{{ message_adding }}<br>
-    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-  </form>
+  {% if session.user_id %}
+    <form method="POST" enctype="multipart/form-data">
+      <a>Grade</a><br>
+      <a>- 1 - 2 - 3 - 4 - 5 -</a><br>
+      <input type="radio" name="grade" value="1" checked>
+      <input type="radio" name="grade" value="2" checked>
+      <input type="radio" name="grade" value="3" checked>
+      <input type="radio" name="grade" value="4" checked>
+      <input type="radio" name="grade" value="5" checked><br><br>
+    
+      <a>Review album:</a><br>
+      <textarea name="comment" rows="5" cols="60"></textarea>{{ message_comment }}<br>
+      <input type="submit" value="Add review">{{ message_adding }}<br>
+      <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+    </form>
+  {% else %}
+    <h4>Login to review the album album</h4>
+  {% endif %}
 </body>

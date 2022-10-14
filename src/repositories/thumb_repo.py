@@ -10,7 +10,7 @@ def add_thumb(song_id:int, user_id:int, thumb:int):
 
 def get_thumbs_for_songs(album_id:int):
   sql = "SELECT song_id, user_id, " \
-        "COUNT(CASE WHEN thumb < 0 THEN -1 ELSE NULL END) AS thum_neg, " \
+        "COUNT(CASE WHEN thumb < 0 THEN -1 ELSE 0 END) AS thum_neg, " \
 	      "COUNT(CASE WHEN thumb > 0 THEN 1 ELSE NULL END) AS thum_pos, " \
 	      "CAST(AVG(thumb)*5 AS INTEGER) AS thumb " \
 	      "FROM thumbs " \

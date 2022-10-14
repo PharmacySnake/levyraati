@@ -205,9 +205,43 @@ def remove_album(album_id:int):
 	print("remove album")
 
 
-def get_album_length(album_id:int):
-	print("get album length")
+def toggle_album_editability(album_id:int):
+  if album_exists(album_id):
+    editable = not get_album_editability(album_id)
+    sql = "UPDATE albums SET editable=:editable WHERE id=:album_id"
+    db.session.execute(sql, {"editable":editable, "album_id":album_id})
+    db.session.commit()
+    return True
+  return False
 
 
-def change_visibility(album_id:int):
-  print("change album visibility")
+def toggle_album_visibility(album_id:int):
+  if album_exists(album_id):
+    visible = not get_album_visibility(album_id)
+    sql = "UPDATE albums SET visible=:visible WHERE id=:album_id"
+    db.session.execute(sql, {"visible":visible, "album_id":album_id})
+    db.session.commit()
+    return True
+  return False
+
+
+def get_album_visibility(album_id:int):
+  sql = "SELECT visible FROM albums WHERE id=:album_id"
+  result = db.session.execute(sql, {"album_id":album_id})
+  return result.fetchone()
+
+
+def get_album_editability(album_id:int):
+  sql = "SELECT editable FROM albums WHERE id=:album_id"
+  result = db.session.execute(sql, {"album_id":album_id})
+  return result.fetchone()
+
+
+def album_exists(album_id):
+  sql = "SELECT id FROM albums WHERE id=:album_id"
+  result = db.session.execute(sql, {"album_id":album_id})
+  if not result:
+    return False
+  return True
+
+
