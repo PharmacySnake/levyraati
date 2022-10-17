@@ -1,4 +1,6 @@
 from base64 import b64encode
+
+from django.shortcuts import render
 from app import app
 from flask import render_template, redirect, request, session, \
                   make_response, flash
@@ -233,11 +235,12 @@ def toggle_admin():
      and session["admin"]:
     user_id = request.form["user_id"]
     status = request.form["admin"]
+    users = user_repo.get_all_users()
     if status:
       user_repo.promote_user_to_admin(user_id)
     else:
       user_repo.demote_user_from_admin(user_id)
-    return admin()
+    return render_template("admin.html", users=users)
   return redirect("/")
 
 def encode_images_in_albums(albums_data):
