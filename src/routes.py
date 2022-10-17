@@ -1,6 +1,4 @@
 from base64 import b64encode
-
-from django.shortcuts import render
 from app import app
 from flask import render_template, redirect, request, session, \
                   make_response, flash
