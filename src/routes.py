@@ -237,7 +237,7 @@ def toggle_admin():
       user_repo.promote_user_to_admin(user_id)
     else:
       user_repo.demote_user_from_admin(user_id)
-    return render_template("admin.html")
+    return admin()
   return redirect("/")
 
 def encode_images_in_albums(albums_data):
