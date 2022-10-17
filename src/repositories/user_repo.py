@@ -27,6 +27,16 @@ def check_username_availability(username:str):
   return bool(result.fetchall())
 
 
+def get_all_users():
+  sql = "SELECT * FROM users"
+  result = db.session.execute(sql)
+  return result.fetchall()
+
+def get_user_by_name(username:str):
+  sql = "SELECT * FROM users WHERE usernmame=:username"
+  result = db.session.execute(sql, {"username":username})
+  return result.fetchone()
+
 def login(username:str, password:str):
   sql = "SELECT id, passwrd, is_admin " \
         "FROM users " \

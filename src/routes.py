@@ -211,6 +211,35 @@ def artist(artist_name:str):
   return redirect("/")
 
 
+@app.route("/admin", methods=["GET", "POST"])
+def admin():
+  if session.admin:
+    if request.method == "GET":
+      users = user_repo.get_all_users()
+      return render_template("admin.html", users=users)
+
+    token = request.form["csrf_token"]
+    if request.method == "POST" and user_serv.check_token(token):
+      username = request.form["username"]
+      users = user_repo.get_user_by_name(username)
+      return render_template("admin.html", users=users)
+  else:
+    return redirect("/")
+
+@app.route("/toggle/admin", methods=["POST"])
+def toggle_admin(user_id:int):
+  token = request.form["csrf_token"]
+  if request.method == "POST" and user_serv.check_token(token) \
+     and session.admin:
+    user_id = request.form["user_id"]
+    status = request.form["admin"]
+    if status:
+      user_repo.promote_user_to_admin(user_id)
+    else:
+      user_repo.demote_user_from_admin(user_id)
+    return render_template("admin.html")
+  return redirect("/")
+
 def encode_images_in_albums(albums_data):
   encoded_images = []
   for image in albums_data:

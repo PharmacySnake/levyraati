@@ -8,6 +8,9 @@
 <body>
   {% if session.user_id %}
     <a href="/logout">Logout</a><br>
+    {% if session.admin %}
+      <a href="/admin">Admin</a>
+    {% endif %}
     <a href="/addalbum">Add a new album and review</a><br>
   {% else %}
     <a href="/login">Login</a><br>
@@ -31,7 +34,7 @@
     <a>{{ album.genre }}</a><br>
   </div>
   {% for i in range(0, songs_len) %}
-    <form action="/thumb" method="POST">
+    <form action="/thumb" method="POST" enctype="multipart/form-data">
       <a>{{ songs[i].song_name }} - {{ songs[i].song_len_min }}min {{ songs[i].song_len_sec }}sec</a>
       <a> [</a>
       {% if thumbs[i] and thumbs[i].thumb > 0 %}

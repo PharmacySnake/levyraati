@@ -18,5 +18,5 @@ def check_token(token):
 
 def logout():
   del session["username"]
-  #del session["admin"]
+  del session["admin"]
   session.clear()
