@@ -227,7 +227,7 @@ def admin():
     return redirect("/")
 
 @app.route("/toggle/admin", methods=["POST"])
-def toggle_admin(user_id:int):
+def toggle_admin():
   token = request.form["csrf_token"]
   if request.method == "POST" and user_serv.check_token(token) \
      and session["admin"]:
