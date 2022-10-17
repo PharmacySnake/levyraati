@@ -24,7 +24,7 @@
   {% if session.admin %}
     <h4>admin in the house</h4>
     <a>Find by name. Name has to be accurate or left empty to get all users</a>
-    <form action="/administrate" method="POST" enctype="multipart/form-data">
+    <form action="/admin" method="POST" enctype="multipart/form-data">
       <input type="text" name="username" value=""/>{{ message_name }}<br>
       <input type="submit" value="Search"><br>
     </form>
