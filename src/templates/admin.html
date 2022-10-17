@@ -34,13 +34,13 @@
       <form action="/toggle/admin" method="POST" enctype="multipart/form-data">
         {% for user in users %}
           {{ user }}
-          {% if user.admin %}
+          {% if user.is_admin %}
             <input type="submit" value="demote"><br>
           {% else %}
             <input type="submit" value="promote"><br>
           {% endif %}
           <input type="hidden" name="admin" value="{{ user.id }}">
-          <input type="hidden" name="admin" value="{{ user.admin }}">
+          <input type="hidden" name="admin" value="{{ user.is_admin }}">
           <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
         {% endfor %}
       </form>

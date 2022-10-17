@@ -93,7 +93,7 @@ def addalbum():
       songs_length = {}
       song = request.form["song0"]
       if song == "":
-        return render_template("addalbum.html", message_song=" An album hasto contain atleast one (1) song.")
+        return render_template("addalbum.html", message_song="An album hasto contain atleast one (1) song.")
       else:
         for i in range(11):
           song = request.form["song"+str(i)]
