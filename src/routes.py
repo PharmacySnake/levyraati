@@ -213,7 +213,7 @@ def artist(artist_name:str):
 
 @app.route("/admin", methods=["GET", "POST"])
 def admin():
-  if session.admin:
+  if session["admin"]:
     if request.method == "GET":
       users = user_repo.get_all_users()
       return render_template("admin.html", users=users)
@@ -230,7 +230,7 @@ def admin():
 def toggle_admin(user_id:int):
   token = request.form["csrf_token"]
   if request.method == "POST" and user_serv.check_token(token) \
-     and session.admin:
+     and session["admin"]:
     user_id = request.form["user_id"]
     status = request.form["admin"]
     if status:
