@@ -34,7 +34,6 @@ def logout():
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
-  #"""
   if request.method == "GET":
     return render_template("register.html")
   elif request.method == "POST":
@@ -133,9 +132,8 @@ def edit_album(id:int):
 @app.route("/albums", methods=["GET"])
 def sort_albums():
   if request.method == "GET":
-    #albums = []
     sort = request.args.get("sort")
-    albums = album_repo.display_albums_asc()
+    albums = album_repo.display_albums_desc()
     if sort == "albums_desc":
       albums = album_repo.display_albums_desc()
     elif sort == "albums_asc":
@@ -213,13 +211,20 @@ def artist(artist_name:str):
 
 @app.route("/admin", methods=["GET", "POST"])
 def admin():
-  if session["admin"]:
+  token = request.form["csrf_token"]
+  if session["admin"] and user_serv.check_token(token):
     if request.method == "GET":
       users = user_repo.get_all_users()
-      return render_template("admin.html", users=users)
+      if request.form["search"]:
+        username = request.form["user"]
+        users = user_repo.get_user_by_name(username)
+        if users:
+          return render_template("admin.html", users=users)
+        else:
+          return render_template("admin.html", message_none_found="No users were found by that name.")
 
-    token = request.form["csrf_token"]
-    if request.method == "POST" and user_serv.check_token(token):
+    
+    if request.method == "POST" :
       username = request.form["username"]
       users = user_repo.get_user_by_name(username)
       return render_template("admin.html", users=users)
@@ -233,11 +238,11 @@ def toggle_admin():
      and session["admin"]:
     user_id = request.form["user_id"]
     status = request.form["admin"]
-    users = user_repo.get_all_users()
     if status:
       user_repo.promote_user_to_admin(user_id)
     else:
       user_repo.demote_user_from_admin(user_id)
+    users = user_repo.get_all_users()
     return render_template("admin.html", users=users)
   return redirect("/")
 
