@@ -211,7 +211,7 @@ def artist(artist_name:str):
 
 @app.route("/admin", methods=["GET", "POST"])
 def admin():
-  #token = request.form["csrf_token"]
+  token = request.form["csrf_token"]
   #if session["admin"] and user_serv.check_token(token):
   #if session["admin"]:
     #if user_serv.check_token(token):
