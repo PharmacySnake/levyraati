@@ -216,8 +216,8 @@ def admin():
     if request.method == "GET":
       users = user_repo.get_all_users()
       #if request.form["search"]:
-      username = request.form["user"]
-      users = user_repo.get_user_by_name(username)
+      #username = request.form["user"]
+      #users = user_repo.get_user_by_name(username)
       if users:
         return render_template("admin.html", users=users)
       else:
