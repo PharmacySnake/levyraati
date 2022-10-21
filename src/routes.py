@@ -214,8 +214,8 @@ def admin():
   if session["admin"]:
     if request.method == "GET":
       if request.form["search"]:
-        token = request.form["csrf_token"]
-        if user_serv.check_token(token):
+        #token = request.form["csrf_token"]
+        #if user_serv.check_token(token):
           if request.form["user"] == "":
             users = user_repo.get_all_users()    
           else:
