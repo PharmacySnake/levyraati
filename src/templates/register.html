@@ -8,14 +8,14 @@
   {% if session.user_id %}
     <a href="/logout">Logout</a><br>
     {% if session.admin %}
-      <a href="/admin">Admin</a>
+      <a href="/admin">Admin</a><br>
     {% endif %}
     <a href="/addalbum">Add a new album and review</a><br>
   {% else %}
     <a href="/login">Login</a><br>
   {% endif %}
-  <a href="/">Go back to front page</a><br>
   <a href="/albums">Browse albums and reviews</a><br>
+  <a href="/">Go back to front page</a><br>
   <hr>
   
   <h1>Create new account</h1>

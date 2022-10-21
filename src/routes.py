@@ -23,7 +23,7 @@ def login():
     password = request.form["password"]
     if user_repo.login(username, password):
       return redirect("/")
-  return render_template("error.html", message="Unidentified username or incorrect password")
+  return render_template("login.html", login_error_message ="Unidentified username or incorrect password")
 
 
 @app.route("/logout")
@@ -133,26 +133,26 @@ def edit_album(id:int):
 def sort_albums():
   if request.method == "GET":
     sort = request.args.get("sort")
-    albums = album_repo.display_albums_desc()
-    if sort == "albums_desc":
-      albums = album_repo.display_albums_desc()
-    elif sort == "albums_asc":
-      albums = album_repo.display_albums_asc()
-    elif sort == "artists_desc":
-      albums = album_repo.display_artists_desc()
-    elif sort == "artists_asc":
-      albums = album_repo.display_artists_asc()
+    albums = album_repo.display_albums_asc()
+    if sort == "dates_asc":
+      albums = album_repo.display_date_asc()
     elif sort == "dates_desc":
       albums = album_repo.display_date_desc()
-    elif sort == "dates_asc":
-      albums = album_repo.display_date_asc()
-    elif sort == "grades_desc":
-      albums = album_repo.display_rating_desc()
+    elif sort == "albums_asc":
+      albums = album_repo.display_albums_asc()
+    elif sort == "albums_desc":
+      albums = album_repo.display_albums_desc()
+    elif sort == "artists_asc":
+      albums = album_repo.display_artists_asc()
+    elif sort == "artists_desc":
+      albums = album_repo.display_artists_desc()
     elif sort == "grades_asc":
       albums = album_repo.display_rating_asc()
+    elif sort == "grades_desc":
+      albums = album_repo.display_rating_desc()
     images = encode_images_in_albums(albums)
     return render_template("albums.html", albums=albums, images=images, len=len(albums))
-
+    
 
 @app.route("/addreview")#, methods="POST")
 def addreview():
@@ -215,13 +215,13 @@ def admin():
   if session["admin"] and user_serv.check_token(token):
     if request.method == "GET":
       users = user_repo.get_all_users()
-      if request.form["search"]:
-        username = request.form["user"]
-        users = user_repo.get_user_by_name(username)
-        if users:
-          return render_template("admin.html", users=users)
-        else:
-          return render_template("admin.html", message_none_found="No users were found by that name.")
+      #if request.form["search"]:
+      username = request.form["user"]
+      users = user_repo.get_user_by_name(username)
+      if users:
+        return render_template("admin.html", users=users)
+      else:
+        return render_template("admin.html", message_none_found="No users were found by that name.")
 
     
     if request.method == "POST" :
