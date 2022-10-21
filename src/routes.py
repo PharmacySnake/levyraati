@@ -212,22 +212,26 @@ def artist(artist_name:str):
 @app.route("/admin", methods=["GET", "POST"])
 def admin():
   token = request.form["csrf_token"]
-  if session["admin"] and user_serv.check_token(token):
-    if request.method == "GET":
-      users = user_repo.get_all_users()
-      #if request.form["search"]:
-      #username = request.form["user"]
-      #users = user_repo.get_user_by_name(username)
-      if users:
-        return render_template("admin.html", users=users)
-      else:
-        return render_template("admin.html", message_none_found="No users were found by that name.")
+  #if session["admin"] and user_serv.check_token(token):
+  if session["admin"]:
+    if user_serv.check_token(token):
+      if request.method == "GET":
+        users = user_repo.get_all_users()
+        #if request.form["search"]:
+        #username = request.form["user"]
+        #users = user_repo.get_user_by_name(username)
+        if users:
+          return render_template("admin.html", users=users)
+        else:
+          return render_template("admin.html", message_none_found="No users were found by that name.")
 
     
-    if request.method == "POST" :
-      username = request.form["username"]
-      users = user_repo.get_user_by_name(username)
-      return render_template("admin.html", users=users)
+      if request.method == "POST" :
+        username = request.form["username"]
+        users = user_repo.get_user_by_name(username)
+        return render_template("admin.html", users=users)
+    else:
+      return redirect("/")  
   else:
     return redirect("/")
 
