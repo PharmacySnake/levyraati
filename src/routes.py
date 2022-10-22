@@ -216,7 +216,7 @@ def admin():
       #if request.form["search"]:
         #token = request.form["csrf_token"]
         #if user_serv.check_token(token):
-          if request.form["user"] == "":
+          if len(request.form["user"]) == 0:
             users = user_repo.get_all_users()    
           else:
             username = request.form["user"]
