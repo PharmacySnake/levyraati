@@ -36,7 +36,7 @@ def get_all_users():
 def get_user_by_name(username:str):
   sql = "SELECT id, username, is_admin FROM users WHERE username=:username"
   result = db.session.execute(sql, {"username":username})
-  return result.fetchone()
+  return result.fetchall()
 
 
 def login(username:str, password:str):
