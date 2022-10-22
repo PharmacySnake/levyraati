@@ -257,7 +257,7 @@ def toggle_hide_song():
       song_repo.set_song_invisible(song_id)
     else:
       song_repo.set_song_visible(song_id)
-    return render_template("/album/"+str(album_id))
+    return redirect("/album/"+str(album_id))
   return redirect("/")
 
 def encode_images_in_albums(albums_data):
