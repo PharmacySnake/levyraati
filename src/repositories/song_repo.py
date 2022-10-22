@@ -43,7 +43,7 @@ def remove_song(song_id:int):
 
 def set_song_visible(song_id:int):
   if song_exists(song_id):
-    sql = "UPDATE songs SET visible=:false WHERE id=:song_id"
+    sql = "UPDATE songs SET visible=false WHERE id=:song_id"
     db.session.execute(sql, {"song_id":song_id})
     db.session.commit()
     return True
@@ -51,7 +51,7 @@ def set_song_visible(song_id:int):
 
 def set_song_visible(song_id:int):
   if song_exists(song_id):
-    sql = "UPDATE songs SET visible=:false WHERE id=:song_id"
+    sql = "UPDATE songs SET visible=false WHERE id=:song_id"
     db.session.execute(sql, {"song_id":song_id})
     db.session.commit()
     return True
