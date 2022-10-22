@@ -213,20 +213,9 @@ def artist(artist_name:str):
 def admin():
   if session["admin"]:
     if request.method == "GET":
-      #if request.form["search"]:
-        #token = request.form["csrf_token"]
-        #if user_serv.check_token(token):
-          #if len(request.form["user"]) == 0:
       users = user_repo.get_all_users()
       return render_template("admin.html", users=users)
-          #else:
-            #username = request.form["user"]
-            #users = user_repo.get_user_by_name(username)
-          #if users:
-          #  return render_template("admin.html", users=users)
-          #else:
-          #  return render_template("admin.html", message_none_found="No users were found by that name.")
-
+      
     elif request.method == "POST" :
       username = request.form["user"]
       if len(username) == 0:
@@ -235,11 +224,6 @@ def admin():
       else:
         users = user_repo.get_user_by_name(username)
         return render_template("admin.html", users=users)
-      #return render_template("admin.html", users=users)
-      #if request.method == "POST" :
-      #  username = request.form["username"]
-      #  users = user_repo.get_user_by_name(username)
-      #  return render_template("admin.html", users=users)
   else:
     return redirect("/")  
 

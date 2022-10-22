@@ -17,14 +17,13 @@
     <a href="/register">Register</a><br>
   {% endif %}
   <a href="/albums">Browse albums and reviews</a><br>
-  <a href="/">Go back to front page</a><br>return render_template("admin.html", users=users)
+  <a href="/">Go back to front page</a><br>
   <hr>
 
   <br><br>
   {% if session.admin %}
     <h4>admin in the house</h4>
     <a>Find by name. Name has to be exact or left empty to get all users</a><br>
-    <!--form action="/admin" method="GET" enctype="multipart/form-data"-->
     <form action="/admin" method="POST" enctype="multipart/form-data">
       <input type="text" name="user" value=""/> {{ message_none_found }}<br>
       <input type="submit" value="search"><br>
