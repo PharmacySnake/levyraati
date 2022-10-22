@@ -1,4 +1,5 @@
 from base64 import b64encode
+import re
 from app import app
 from flask import render_template, redirect, request, session, \
                   make_response, flash
@@ -241,6 +242,22 @@ def toggle_admin():
       user_repo.demote_user_from_admin(user_id)
     users = user_repo.get_all_users()
     return render_template("admin.html", users=users)
+  return redirect("/")
+
+
+@app.route("/toggle/hide/song", methods=["POST"])
+def toggle_hide_song():
+  token = request.form["csrf_token"]
+  if request.method == "POST" and user_serv.check_token(token) \
+     and session["admin"]:
+    album_id = request.form["album_id"]
+    song_id = request.form["song_id"]
+    status = request.form["visible"]
+    if status:
+      song_repo.set_song_invisible(song_id)
+    else:
+      song_repo.set_song_visible(song_id)
+    return render_template("/album/"+str(album_id))
   return redirect("/")
 
 def encode_images_in_albums(albums_data):

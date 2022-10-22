@@ -57,7 +57,7 @@ def login(username:str, password:str):
 
 def promote_user_to_admin(user_id:int):
   if user_exists(user_id):
-    sql = "UPDATE users SET is_admin=true where id=:user_id"
+    sql = "UPDATE users SET is_admin=true WHERE id=:user_id"
     db.session.execute(sql, {"user_id":user_id})
     db.session.commit()
     return True
@@ -66,7 +66,7 @@ def promote_user_to_admin(user_id:int):
 
 def demote_user_from_admin(user_id:int):
   if user_exists(user_id):
-    sql = "UPDATE users SET is_admin=false where id=:user_id"
+    sql = "UPDATE users SET is_admin=false WHERE id=:user_id"
     db.session.execute(sql, {"user_id":user_id})
     db.session.commit()
     return True
