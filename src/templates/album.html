@@ -73,7 +73,7 @@
       <input type="hidden" name="album_id" value="{{ album.id }}">
       <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     </form>
-    {% if {{ session.admin }} %}
+    {% if session.admin %}
       <form action="/toggle/hide/song" method="POST" enctype="multipart/form-data">
         <button type="submit" name="visible" value="">visibility</button> {{ songs[i].visible }}<br>
         <input type="hidden" name="album_id" value="{{ album.id }}">
