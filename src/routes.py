@@ -231,7 +231,7 @@ def admin():
       username = request.form["user"]
       if len(username) == 0:
         users = user_repo.get_all_users()
-        return render_template("admin.html", message_none_found="No users were found by that name.")
+        return render_template("admin.html", users=users, message_none_found="No users were found by that name.")
       else:
         users = user_repo.get_user_by_name(username)
         return render_template("admin.html", users=users)
