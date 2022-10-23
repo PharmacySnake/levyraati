@@ -84,7 +84,6 @@ def addalbum():
       if not file.filename.endswith(".jpg"):
         return render_template("addalbum.html", message_image="Invalid file type. Only .jpg files accepted.")
       cover_image = file.read()
-      print(len(cover_image), "bytes")
       if len(cover_image) > 1024*1024:
         return render_template("addalbum.html", message_image="Image is too large")
       comment = request.form["comment"]
@@ -237,6 +236,7 @@ def toggle_admin():
     user_id = request.form["user_id"]
     username = request.form["username"]
     status = strtobool(request.form["is_admin"])
+    '''
     if request.form["promote"]:
       user_repo.promote_user_to_admin(user_id)
     elif request.form["demote"]:
@@ -246,7 +246,7 @@ def toggle_admin():
       user_repo.promote_user_to_admin(user_id)
     else:
       user_repo.demote_user_from_admin(user_id)
-    '''
+    #'''
     users = user_repo.get_user_by_name(username)
     return render_template("admin.html", users=users)
   return redirect("/")
