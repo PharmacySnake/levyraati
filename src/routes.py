@@ -1,4 +1,5 @@
 from base64 import b64encode
+from distutils.util import strtobool
 from app import app
 from flask import render_template, redirect, request, session, \
                   make_response, flash
@@ -251,9 +252,9 @@ def toggle_hide_song():
      and session["admin"]:
     album_id = request.form["album_id"]
     song_id = request.form["song_id"]
-    #status = request.form["visible"]
+    status = strtobool(request.form["visible"])
     
-    status = request.args.get("visible", type=bool)
+    #status = request.args.get("visible", type=bool)
     if status:
       song_repo.set_song_invisible(song_id)
     else:
