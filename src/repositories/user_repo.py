@@ -28,7 +28,7 @@ def check_username_availability(username:str):
 
 
 def get_all_users():
-  sql = "SELECT id, username, is_admin FROM users"
+  sql = "SELECT id, username, is_admin FROM users ORDER BY id"
   result = db.session.execute(sql)
   return result.fetchall()
 

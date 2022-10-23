@@ -235,12 +235,13 @@ def toggle_admin():
   if request.method == "POST" and user_serv.check_token(token) \
      and session["admin"]:
     user_id = request.form["user_id"]
+    username = request.form["usernmae"]
     status = strtobool(request.form["admin"])
     if status:
       user_repo.promote_user_to_admin(user_id)
     else:
       user_repo.demote_user_from_admin(user_id)
-    users = user_repo.get_all_users()
+    users = user_repo.get_user_by_name(username)
     return render_template("admin.html", users=users)
   return redirect("/")
 
@@ -253,13 +254,13 @@ def toggle_hide_song():
     album_id = request.form["album_id"]
     song_id = request.form["song_id"]
     status = strtobool(request.form["visible"])
-    
     if status:
       song_repo.set_song_invisible(song_id)
     else:
       song_repo.set_song_visible(song_id)
     return redirect("/album/"+str(album_id))
   return redirect("/")
+
 
 def encode_images_in_albums(albums_data):
   encoded_images = []
