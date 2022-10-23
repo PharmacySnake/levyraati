@@ -237,9 +237,9 @@ def toggle_admin():
     username = request.form["username"]
     status = strtobool(request.form["is_admin"])
     if status:
-      user_repo.demote_user_to_admin(user_id)
+      user_repo.demote_user_from_admin(user_id)
     else:
-      user_repo.promote_user_from_admin(user_id)
+      user_repo.promote_user_to_admin(user_id)
     users = user_repo.get_user_by_name(username)
     return render_template("admin.html", users=users)
   return redirect("/")
