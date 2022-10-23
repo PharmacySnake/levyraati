@@ -33,23 +33,28 @@
     <hr>
 
     <h5>Promote or demote user to/from admin</h5>
-    <form action="/toggle/admin" method="POST" enctype="multipart/form-data"></form>
+    
       {% if users %}
         {% for user in users %}
           <a>id: {{ user.id }}, username: {{ user.username }} <br>
              admin: {{ user.is_admin }} </a>
-          
-          {% if user.is_admin %}
-            <input type="submit" value="demote"><br><br>
-          {% else %}
-            <input type="submit" value="promote"><br><br>
-          {% endif %}
-          <input type="hidden" name="user_id" value="{{ user.id }}">
-          <input type="hidden" name="username" value="{{ user.username }}">
-          <input type="hidden" name="is_admin" value="{{ user.is_admin }}">
-          <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+          <form action="/toggle/admin" method="POST" enctype="multipart/form-data"></form>      
+            {% if user.is_admin %}
+              <input type="submit" value="demote"><br><br>
+              <input type="hidden" name="user_id" value="{{ user.id }}">
+              <input type="hidden" name="username" value="{{ user.username }}">
+              <input type="hidden" name="is_admin" value="{{ user.is_admin }}">
+              <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+            {% else %}
+              <input type="submit" value="promote"><br><br>
+              <input type="hidden" name="user_id" value="{{ user.id }}">
+              <input type="hidden" name="username" value="{{ user.username }}">
+              <input type="hidden" name="is_admin" value="{{ user.is_admin }}">
+              <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+            {% endif %}
+          </form>
         {% endfor %}
-      </form>
+      
 
     {% else %}
       {{ message_none_found }}
