@@ -235,7 +235,7 @@ def toggle_admin():
   if request.method == "POST" and user_serv.check_token(token) \
      and session["admin"]:
     user_id = request.form["user_id"]
-    status = request.form["admin"]
+    status = strtobool(request.form["admin"])
     if status:
       user_repo.promote_user_to_admin(user_id)
     else:
@@ -254,7 +254,6 @@ def toggle_hide_song():
     song_id = request.form["song_id"]
     status = strtobool(request.form["visible"])
     
-    #status = request.args.get("visible", type=bool)
     if status:
       song_repo.set_song_invisible(song_id)
     else:
