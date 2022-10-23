@@ -21,6 +21,7 @@
   <a href="/">Go back to front page</a><br>
   <hr>
 
+
   <br><br>
   {% if session.admin %}
     <h4>admin in the house</h4>
@@ -30,6 +31,7 @@
       <input type="submit" value="search"><br>
     </form>
     <hr>
+
     <h5>Promote or demote user to/from admin</h5>
     {% if users %}
       <form action="/toggle/admin" method="POST" enctype="multipart/form-data">
@@ -46,6 +48,7 @@
           <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
         {% endfor %}
       </form>
+
     {% else %}
       {{ message_none_found }}
     {% endif %}
