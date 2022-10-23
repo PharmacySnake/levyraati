@@ -2,10 +2,11 @@
 <head>
     <meta charset="utf-8">
     <title>Add new album</title>
+    <link rel="stylesheet" href="../static/resize-image.css">
 </head>
 
 <body>
-  <div>
+  <div class="simpmargin">
     {% if session.user_id %}
       <b>You are logged in as {{ session.username }}</b><br>
       <a href="/logout">Logout</a><br>
@@ -21,108 +22,109 @@
     <a href="/">Go back to front page</a><br>
   </div>
   <hr>
-
-  {% if session.user_id %}
-    <h1>Add new album</h1>
-    <form action="/addalbum" method="POST" enctype="multipart/form-data">
-      <div>
-        <a>Album title:</a><br>
-        <input type="text" name="albumname" value=""/>{{ message_name }}<br><br>
-        <a>Artist:</a><br>
-        <input type="text" name="artist" value=""/>{{ message_artist }}<br><br>
-        <a>Genre:</a><br>
-        <input type="text" name="genre" value=""/>{{ message_genre }}<br><br>
-        <a>Release year:</a><br>
-        <input type="text" name="releaseyear" value=""/>{{ message_release }}<br><br>
-        <a>Add cover image:</a><br>
-        <input type="file" name="cover_image">{{ message_image }}<br><br>
+  <div class="simpmargin">
+    {% if session.user_id %}
+      <h1>Add new album</h1>
+      <form action="/addalbum" method="POST" enctype="multipart/form-data">
+        <div>
+          <a>Album title:</a><br>
+          <input type="text" name="albumname" value=""/>{{ message_name }}<br><br>
+          <a>Artist:</a><br>
+          <input type="text" name="artist" value=""/>{{ message_artist }}<br><br>
+          <a>Genre:</a><br>
+          <input type="text" name="genre" value=""/>{{ message_genre }}<br><br>
+          <a>Release year:</a><br>
+          <input type="text" name="releaseyear" value=""/>{{ message_release }}<br><br>
+          <a>Add cover image:</a><br>
+          <input type="file" name="cover_image">{{ message_image }}<br><br>
     
-       <a>Add songs:</a>{{ message_song }}<br>
-        <a>-- Name: ----------------------------- Length: -- Min: ---- Sec:</a><br>
-        <a>1. </a>
-        <input type="text" name="song0" value=""/>
-        <a> -------------- </a>
-        <input type="text" name="min0" value="" size="1">
-        <a> : </a>
-        <input type="text" name="sec0" value="" size="1"><br>
-        <a>2. </a>
-        <input type="text" name="song1" value=""/>
-        <a> -------------- </a>
-        <input type="text" name="min1" value="" size="1">
-        <a> : </a>
-        <input type="text" name="sec1" value="" size="1"><br>
-        <a>3. </a>
-        <input type="text" name="song2" value=""/>
-        <a> -------------- </a>
-        <input type="text" name="min2" value="" size="1">
-        <a> : </a>
-        <input type="text" name="sec2" value="" size="1"><br>
-        <a>4. </a>
-        <input type="text" name="song3" value=""/>
-        <a> -------------- </a>
-        <input type="text" name="min3" value="" size="1">
-        <a> : </a>
-        <input type="text" name="sec3" value="" size="1"><br>
-        <a>5. </a>
-        <input type="text" name="song4" value=""/>
-        <a> -------------- </a>
-        <input type="text" name="min4" value="" size="1">
-        <a> : </a>
-        <input type="text" name="sec4" value="" size="1"><br>
-        <a>6. </a>
-        <input type="text" name="song5" value=""/>
-        <a> -------------- </a>
-        <input type="text" name="min5" value="" size="1">
-        <a> : </a>
-        <input type="text" name="sec5" value="" size="1"><br>
-        <a>7. </a>
-        <input type="text" name="song6" value=""/>
-        <a> -------------- </a>
-        <input type="text" name="min6" value="" size="1">
-        <a> : </a>
-        <input type="text" name="sec6" value="" size="1"><br>
-        <a>8. </a>
-        <input type="text" name="song7" value=""/>
-        <a> -------------- </a>
-        <input type="text" name="min7" value="" size="1">
-        <a> : </a>
-        <input type="text" name="sec7" value="" size="1"><br>
-        <a>9. </a>
-        <input type="text" name="song8" value=""/>
-        <a> -------------- </a>
-        <input type="text" name="min8" value="" size="1">
-        <a> : </a>
-        <input type="text" name="sec8" value="" size="1"><br>
-        <a>10. </a>
-        <input type="text" name="song9" value=""/>
-        <a> -------------- </a>
-        <input type="text" name="min9" value="" size="1">
-        <a> : </a>
-        <input type="text" name="sec9" value="" size="1"><br>
-        <a>11. </a>
-        <input type="text" name="song10" value=""/>
-        <a> -------------- </a>
-        <input type="text" name="min10" value="" size="1">
-        <a> : </a>
-        <input type="text" name="sec10" value="" size="1"><br><br>
-        <a>Grade</a><br>
-        <a>- 1 - 2 - 3 - 4 - 5 -</a><br>
-        <input type="radio" name="grade" value="1" checked>
-        <input type="radio" name="grade" value="2" checked>
-        <input type="radio" name="grade" value="3" checked>
-        <input type="radio" name="grade" value="4" checked>
-        <input type="radio" name="grade" value="5" checked><br><br>
-        <a>Personal review of the album:</a><br>
-        <textarea name="comment" rows="5" cols="60"></textarea>{{ message_comment }}<br>
-      </div>
+         <a>Add songs:</a>{{ message_song }}<br>
+          <a>-- Name: ----------------------------- Length: -- Min: ---- Sec:</a><br>
+          <a>1. </a>
+          <input type="text" name="song0" value=""/>
+          <a> -------------- </a>
+          <input type="text" name="min0" value="" size="1">
+          <a> : </a>
+          <input type="text" name="sec0" value="" size="1"><br>
+          <a>2. </a>
+          <input type="text" name="song1" value=""/>
+          <a> -------------- </a>
+          <input type="text" name="min1" value="" size="1">
+          <a> : </a>
+          <input type="text" name="sec1" value="" size="1"><br>
+          <a>3. </a>
+          <input type="text" name="song2" value=""/>
+          <a> -------------- </a>
+          <input type="text" name="min2" value="" size="1">
+          <a> : </a>
+          <input type="text" name="sec2" value="" size="1"><br>
+          <a>4. </a>
+          <input type="text" name="song3" value=""/>
+          <a> -------------- </a>
+          <input type="text" name="min3" value="" size="1">
+          <a> : </a>
+          <input type="text" name="sec3" value="" size="1"><br>
+          <a>5. </a>
+          <input type="text" name="song4" value=""/>
+          <a> -------------- </a>
+          <input type="text" name="min4" value="" size="1">
+          <a> : </a>
+          <input type="text" name="sec4" value="" size="1"><br>
+          <a>6. </a>
+          <input type="text" name="song5" value=""/>
+          <a> -------------- </a>
+          <input type="text" name="min5" value="" size="1">
+          <a> : </a>
+          <input type="text" name="sec5" value="" size="1"><br>
+          <a>7. </a>
+          <input type="text" name="song6" value=""/>
+          <a> -------------- </a>
+          <input type="text" name="min6" value="" size="1">
+          <a> : </a>
+          <input type="text" name="sec6" value="" size="1"><br>
+          <a>8. </a>
+          <input type="text" name="song7" value=""/>
+          <a> -------------- </a>
+          <input type="text" name="min7" value="" size="1">
+          <a> : </a>
+          <input type="text" name="sec7" value="" size="1"><br>
+          <a>9. </a>
+          <input type="text" name="song8" value=""/>
+          <a> -------------- </a>
+          <input type="text" name="min8" value="" size="1">
+          <a> : </a>
+          <input type="text" name="sec8" value="" size="1"><br>
+          <a>10. </a>
+          <input type="text" name="song9" value=""/>
+          <a> -------------- </a>
+          <input type="text" name="min9" value="" size="1">
+          <a> : </a>
+          <input type="text" name="sec9" value="" size="1"><br>
+          <a>11. </a>
+          <input type="text" name="song10" value=""/>
+          <a> -------------- </a>
+          <input type="text" name="min10" value="" size="1">
+          <a> : </a>
+          <input type="text" name="sec10" value="" size="1"><br><br>
+          <a>Grade</a><br>
+          <a>- 1 - 2 - 3 - 4 - 5 -</a><br>
+          <input type="radio" name="grade" value="1" checked>
+          <input type="radio" name="grade" value="2" checked>
+          <input type="radio" name="grade" value="3" checked>
+          <input type="radio" name="grade" value="4" checked>
+          <input type="radio" name="grade" value="5" checked><br><br>
+          <a>Personal review of the album:</a><br>
+          <textarea name="comment" rows="5" cols="60"></textarea>{{ message_comment }}<br>
+        </div>
     
-      <div>
-        <input type="submit" value="Add album">{{ message_adding }}<br>
-        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-      </div>
-    </form>
-  {% else %}
-    <h4>Login to add an album</h4>
-  {% endif %}
+        <div>
+          <input type="submit" value="Add album">{{ message_adding }}<br>
+          <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+        </div>
+      </form>
+    {% else %}
+      <h4>Login to add an album</h4>
+    {% endif %}
+  </div>
 
 </body>

@@ -6,19 +6,21 @@
 </head>  
 
 <body>
-  {% if session.user_id %}
-    <b> Logged in as {{ session.username }}</b><br>
-    <a href="/logout">Logout</a><br>
-    {% if session.admin %}
-      <a href="/admin">Admin</a><br>
+  <div class="simpmargin">
+    {% if session.user_id %}
+      <b> Logged in as {{ session.username }}</b><br>
+      <a href="/logout">Logout</a><br>
+      {% if session.admin %}
+        <a href="/admin">Admin</a><br>
+      {% endif %}
+      <a href="/addalbum">Add a new album and review</a><br>
+    {% else %}
+      <a href="/login">Login</a><br>
+      <a href="/register">Register</a><br>
     {% endif %}
-    <a href="/addalbum">Add a new album and review</a><br>
-  {% else %}
-    <a href="/login">Login</a><br>
-    <a href="/register">Register</a><br>
-  {% endif %}
-  <a href="/">Go back to front page</a><br>
-  <a href="/albums">Browse albums and reviews</a><br>
+    <a href="/">Go back to front page</a><br>
+    <a href="/albums">Browse albums and reviews</a><br>
+  </div>
   <hr>
 
   <h1>Albums</h1>
@@ -53,6 +55,8 @@
       <a>{{ albums[i].username }}</a><br>
       <i>{{ albums[i].date_added.strftime("%Y-%m-%d %H:%M") }}</i><br><br>
     </div>
+    <br>
+    <hr>
   {% endfor %}
 
 </body>

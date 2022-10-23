@@ -2,22 +2,25 @@
 <head>
   <meta charset="utf-8">
   <title>Artist</title>
+  <link rel="stylesheet" href="../static/resize-image.css">
 </head>  
 
 <body>
-  {% if session.user_id %}
-    <b> Logged in as {{ session.username }}</b><br>
-    <a href="/logout">Logout</a><br>
-    {% if session.admin %}
-      <a href="/admin">Admin</a><br>
+  <div class="simpmargin">
+    {% if session.user_id %}
+      <b> Logged in as {{ session.username }}</b><br>
+      <a href="/logout">Logout</a><br>
+      {% if session.admin %}
+        <a href="/admin">Admin</a><br>
+      {% endif %}
+      <a href="/addalbum">Add a new album and review</a><br>
+    {% else %}
+      <a href="/login">Login</a><br>
+      <a href="/register">Register</a><br>
     {% endif %}
-    <a href="/addalbum">Add a new album and review</a><br>
-  {% else %}
-    <a href="/login">Login</a><br>
-    <a href="/register">Register</a><br>
-  {% endif %}
-  <a href="/albums">Browse albums and reviews</a><br>
-  <a href="/">Go back to front page</a><br>
+    <a href="/albums">Browse albums and reviews</a><br>
+    <a href="/">Go back to front page</a><br>
+  </div>
   <hr>
   
   <br><br>
