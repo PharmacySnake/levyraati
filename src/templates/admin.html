@@ -45,7 +45,7 @@
             {% endif %}
             <input type="hidden" name="user_id" value="{{ user.id }}">
             <input type="hidden" name="username" value="{{ user.username }}">
-            <input type="hidden" name="admin" value="{{ user.is_admin }}">
+            <input type="hidden" name="is_admin" value="{{ user.is_admin }}">
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
           </form>
         {% endfor %}
