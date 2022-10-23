@@ -253,7 +253,8 @@ def toggle_hide_song():
     album_id = request.form["album_id"]
     song_id = request.form["song_id"]
     status = request.form["visible"]
-    if status == "t":
+    status = request.args.get("visible", type=bool)
+    if status:
       song_repo.set_song_invisible(song_id)
     else:
       song_repo.set_song_visible(song_id)
