@@ -23,21 +23,23 @@
   </div>
   <hr>
 
-  <h1>Albums</h1>
-  <a>Sort albums:</a><br>
-  <form>
-    <select name="sort">
-      <option value="dates_asc">dates ascending</option>
-      <option value="dateas_desc">dates descending</option>
-      <option value="albums_asc">albums ascending</option>
-      <option value="albums_desc">albums descending</option>
-      <option value="artists_asc">artists ascending</option>
-      <option value="artists_desc">artists descending</option>
-      <option value="grades_asc">grades ascending</option>
-      <option value="grades_desc">grades descending</option>
-    </select>
-    <button type="submit">submit</button>
-  </form>
+  <div class="pimpmargin">
+    <h1>Albums</h1>
+    <a>Sort albums:</a><br>
+    <form>
+      <select name="sort">
+        <option value="dates_asc">dates ascending</option>
+        <option value="dateas_desc">dates descending</option>
+        <option value="albums_asc">albums ascending</option>
+        <option value="albums_desc">albums descending</option>
+        <option value="artists_asc">artists ascending</option>
+        <option value="artists_desc">artists descending</option>
+        <option value="grades_asc">grades ascending</option>
+        <option value="grades_desc">grades descending</option>
+      </select>
+      <button type="submit">submit</button>
+    </form>
+  </div>
   
   {% for i in range(0, len) %}
     <div class="center">

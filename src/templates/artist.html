@@ -23,15 +23,15 @@
   </div>
   <hr>
   
-  <br><br>
-  <h3>{{ artist_name }}</h3><br>
-  <a>-----</a><br>
-  {% for i in range(0, len) %}
-    <img src="data:;base64, {{ images[i] }}" alt=""><br>
-    <a>({{ albums[i].release_year }})</a><br>
-    <a>{{ albums[i].genre }}</a><br>
-    <a href="/album/{{ albums[i].id }}">{{ albums[i].album_name }}</a><br>
-    <a>-----</a><br>
-  {% endfor %}
+  <br>
+  <div class="center">
+    <h3>{{ artist_name }}</h3><br>
+    {% for i in range(0, len) %}
+      <a href="/album/{{ albums[i].id }}">{{ albums[i].album_name }} ({{ albums[i].release_year }})</a><br>
+      <a>{{ albums[i].genre }}</a><br>
+      <img src="data:;base64, {{ images[i] }}" alt=""><br>
+      <hr>
+    {% endfor %}
+  </div>
 
 </body>

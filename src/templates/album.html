@@ -36,71 +36,72 @@
     <img src="data:;base64, {{ cover_image }}" alt=""><br>
   </div>
   
-  
-  {% for i in range(0, songs_len) %}
-    {% if songs[i].visible or session.admin %}
-      <a>{{ songs[i].song_name }} - {{ songs[i].song_len_min }}min {{ songs[i].song_len_sec }}sec</a>
-      <a> [</a>
-      {% if thumbs[i] and thumbs[i].thumb > 0 %}
-        {% for j in range(0, thumbs[i].thumb) %}
-          <a>|</a>
-        {% endfor %}
-        {% for j in range(0, (5 - thumbs[i].thumb)) %}
-          <a>·</a>
-        {% endfor %}
-        <a>] </a>
-      {% else %}
-        <a>· · · · · ]</a>
+  <div class="center">
+    {% for i in range(0, songs_len) %}
+      {% if songs[i].visible or session.admin %}
+        <a>{{ songs[i].song_name }} - {{ songs[i].song_len_min }}min {{ songs[i].song_len_sec }}sec</a>
+        <a> [</a>
+        {% if thumbs[i] and thumbs[i].thumb > 0 %}
+          {% for j in range(0, thumbs[i].thumb) %}
+            <a>|</a>
+          {% endfor %}
+          {% for j in range(0, (5 - thumbs[i].thumb)) %}
+            <a>·</a>
+          {% endfor %}
+          <a>] </a>
+        {% else %}
+          <a>· · · · · ]</a>
+        {% endif %}
+
+        <form action="/thumb" method="POST" enctype="multipart/form-data">
+          <button type="submit" name="thumb" value="1">🡅</button>
+          <button type="submit" name="thumb" value="-1">🡇</button>
+          <input type="hidden" name="song_id" value="{{ songs[i].id }}">
+          <input type="hidden" name="user_id" value="{{ album.user_id }}">
+          <input type="hidden" name="album_id" value="{{ album.id }}">
+          <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+        </form>
       {% endif %}
 
-      <form action="/thumb" method="POST" enctype="multipart/form-data">
-        <button type="submit" name="thumb" value="1">🡅</button>
-        <button type="submit" name="thumb" value="-1">🡇</button>
-        <input type="hidden" name="song_id" value="{{ songs[i].id }}">
-        <input type="hidden" name="user_id" value="{{ album.user_id }}">
-        <input type="hidden" name="album_id" value="{{ album.id }}">
-        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-      </form>
-    {% endif %}
+      {% if session.admin %}
+        <form action="/toggle/hide/song" method="POST" enctype="multipart/form-data">
+          <button type="submit" name="visible" value="{{ songs[i].visible }}">visible</button> {{ songs[i].visible }}<br>
+          <input type="hidden" name="album_id" value="{{ album.id }}">
+          <input type="hidden" name="song_id" value="{{ songs[i].id }}">
+          <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+        </form>
+      {% else %}
+        <br>
+      {% endif %}
+    {% endfor %}
+  </div>
+  <br>
 
-    {% if session.admin %}
-      <form action="/toggle/hide/song" method="POST" enctype="multipart/form-data">
-        <button type="submit" name="visible" value="{{ songs[i].visible }}">visible</button> {{ songs[i].visible }}<br>
-        <input type="hidden" name="album_id" value="{{ album.id }}">
-        <input type="hidden" name="song_id" value="{{ songs[i].id }}">
+  <div class="pimpmargin">
+    {% for review in reviews %}
+      <a>-----<br>
+        grade: {{ review.grade }}<br>
+        {{ review.comment }}<br>
+        user: {{ review.username }}<br>
+      </a>-----<br>
+    {% endfor %}
+    {% if session.user_id %}
+      <form method="POST" enctype="multipart/form-data">
+        <a>Grade</a><br>
+        <a>- 1 - 2 - 3 - 4 - 5 -</a><br>
+        <input type="radio" name="grade" value="1" checked>
+        <input type="radio" name="grade" value="2" checked>
+        <input type="radio" name="grade" value="3" checked>
+        <input type="radio" name="grade" value="4" checked>
+        <input type="radio" name="grade" value="5" checked><br><br>
+    
+        <a>Review album:</a><br>
+        <textarea name="comment" rows="5" cols="60"></textarea>{{ message_comment }}<br>
+        <input type="submit" value="Add review">{{ message_adding }}<br>
         <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
       </form>
     {% else %}
-      <br>
+      <h4>Login to review the album album</h4>
     {% endif %}
-  {% endfor %}
-
-  <br>
-
-  {% for review in reviews %}
-    <a>-----<br>
-      grade: {{ review.grade }}<br>
-      {{ review.comment }}<br>
-      user: {{ review.username }}<br>
-    </a>-----<br>
-  {% endfor %}
-  {% if session.user_id %}
-    <form method="POST" enctype="multipart/form-data">
-      <a>Grade</a><br>
-      <a>- 1 - 2 - 3 - 4 - 5 -</a><br>
-      <input type="radio" name="grade" value="1" checked>
-      <input type="radio" name="grade" value="2" checked>
-      <input type="radio" name="grade" value="3" checked>
-      <input type="radio" name="grade" value="4" checked>
-      <input type="radio" name="grade" value="5" checked><br><br>
-    
-      <a>Review album:</a><br>
-      <textarea name="comment" rows="5" cols="60"></textarea>{{ message_comment }}<br>
-      <input type="submit" value="Add review">{{ message_adding }}<br>
-      <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-    </form>
-  {% else %}
-    <h4>Login to review the album album</h4>
-  {% endif %}
-  
+  </div>
 </body>

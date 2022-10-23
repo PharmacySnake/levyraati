@@ -25,29 +25,32 @@
 
 
   <br><br>
-  {% if session.admin %}
-    <h4>admin in the house</h4>
-    <a>Find by name. Name has to be exact or left empty to get all users</a><br>
-    <form action="/admin" method="POST" enctype="multipart/form-data">
-      <input type="text" name="user" value=""/> {{ message_none_found }}<br>
-      <input type="submit" value="search"><br>
-    </form>
-    <hr>
+  <div class="pimpmargin">
+    {% if session.admin %}
+      <h4>admin in the house</h4>
+      <a>Find by name. Name has to be exact or left empty to get all users</a><br>
+      <form action="/admin" method="POST" enctype="multipart/form-data">
+        <input type="text" name="user" value=""/> {{ message_none_found }}<br>
+        <input type="submit" value="search"><br>
+      </form>
+      <hr>
 
-    <h5>Promote or demote user to/from admin</h5>
-    {% if users %}
-      {% for user in users %}
-        <a>id: {{ user.id }}, username: {{ user.username }} <br>
-           admin: {{ user.is_admin }} </a>
-        <form action="/toggle/admin" method="POST" enctype="multipart/form-data">
-          <button type="submit" name="is_admin" value="{{ user.is_admin }}">toggle admin</button><br><br>
-          <input type="hidden" name="user_id" value="{{ user.id }}">
-          <input type="hidden" name="username" value="{{ user.username }}">
-          <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-        </form>  
-      {% endfor %}
-    {% else %}
-      {{ message_none_found }}
+      <h5>Promote or demote user to/from admin</h5>
+      {% if users %}
+        {% for user in users %}
+          <a>id: {{ user.id }}, username: {{ user.username }} <br>
+             admin: {{ user.is_admin }} </a>
+          <form action="/toggle/admin" method="POST" enctype="multipart/form-data">
+            <button type="submit" name="is_admin" value="{{ user.is_admin }}">toggle admin</button><br><br>
+            <input type="hidden" name="user_id" value="{{ user.id }}">
+            <input type="hidden" name="username" value="{{ user.username }}">
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+          </form>  
+        {% endfor %}
+        
+      {% else %}
+        {{ message_none_found }}
+      {% endif %}
     {% endif %}
-  {% endif %}
+  </div>
 </body>
