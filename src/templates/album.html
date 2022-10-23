@@ -39,7 +39,7 @@
   
   
   {% for i in range(0, songs_len) %}
-    {% if songs[i].visible %}
+    {% if songs[i].visible or session.admin %}
       <a>{{ songs[i].song_name }} - {{ songs[i].song_len_min }}min {{ songs[i].song_len_sec }}sec</a>
       <a> [</a>
       {% if thumbs[i] and thumbs[i].thumb > 0 %}
@@ -51,34 +51,21 @@
         {% endfor %}
         <a>] </a>
       {% else %}
-        <a>·····]</a>
+        <a>· · · · · ]</a>
       {% endif %}
-    {% else %}
-      {% if session.admin %}
-        <a>{{ songs[i].song_name }} - {{ songs[i].song_len_min }}min {{ songs[i].song_len_sec }}sec</a>
-        <a> [</a>
-        {% if thumbs[i] and thumbs[i].thumb > 0 %}
-          {% for j in range(0, thumbs[i].thumb) %}
-            <a>|</a>
-          {% endfor %}
-          {% for j in range(0, (5 - thumbs[i].thumb)) %}
-            <a>·</a>
-          {% endfor %}
-          <a>] </a>
-        {% else %}
-          <a>·····]</a>
-        {% endif %}
-      {% endif %}
+    
     {% endif %}
 
-    <form action="/thumb" method="POST" enctype="multipart/form-data"></form>
-      <button type="submit" name="thumb" value="1">🡅</button>
-      <button type="submit" name="thumb" value="-1">🡇</button>
-      <input type="hidden" name="song_id" value="{{ songs[i].id }}">
-      <input type="hidden" name="user_id" value="{{ album.user_id }}">
-      <input type="hidden" name="album_id" value="{{ album.id }}">
-      <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-    </form>
+    {% if song[i].visible %}
+      <form action="/thumb" method="POST" enctype="multipart/form-data"></form>
+        <button type="submit" name="thumb" value="1">🡅</button>
+        <button type="submit" name="thumb" value="-1">🡇</button>
+        <input type="hidden" name="song_id" value="{{ songs[i].id }}">
+        <input type="hidden" name="user_id" value="{{ album.user_id }}">
+        <input type="hidden" name="album_id" value="{{ album.id }}">
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+      </form>
+    {% endif %}
 
     {% if session.admin %}
       <form action="/toggle/hide/song" method="POST" enctype="multipart/form-data">
