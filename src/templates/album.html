@@ -79,11 +79,11 @@
 
   <div class="pimpmargin">
     {% for review in reviews %}
-      <a>-----<br>
+      <a>
         grade: {{ review.grade }}<br>
         {{ review.comment }}<br>
-        user: {{ review.username }}<br>
-      </a>-----<br>
+        by: {{ review.username }}<br>
+      </a><hr><br>
     {% endfor %}
     {% if session.user_id %}
       <form method="POST" enctype="multipart/form-data">

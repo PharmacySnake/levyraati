@@ -29,7 +29,7 @@
     <form>
       <select name="sort">
         <option value="dates_asc">dates ascending</option>
-        <option value="dateas_desc">dates descending</option>
+        <option value="dates_desc">dates descending</option>
         <option value="albums_asc">albums ascending</option>
         <option value="albums_desc">albums descending</option>
         <option value="artists_asc">artists ascending</option>
@@ -54,8 +54,8 @@
       <a>]</a><br>
       <a href="/artist/{{ albums[i].artist }}">{{ albums[i].artist }}</a><br>
       <a href="/album/{{ albums[i].album_id }}">{{ albums[i].album_name }}</a><br>
-      <a>{{ albums[i].username }}</a><br>
-      <i>{{ albums[i].date_added.strftime("%Y-%m-%d %H:%M") }}</i><br><br>
+      <a>{{ albums[i].username }} <i>{{ albums[i].date_added.strftime("%Y-%m-%d %H:%M") }}</i></a><br>
+      <br><br>
     </div>
     <br>
     <hr>
