@@ -54,7 +54,7 @@
         <a>· · · · · ]</a>
       {% endif %}
 
-      <form action="/thumb" method="POST" enctype="multipart/form-data"></form>
+      <form action="/thumb" method="POST" enctype="multipart/form-data">
         <button type="submit" name="thumb" value="1">🡅</button>
         <button type="submit" name="thumb" value="-1">🡇</button>
         <input type="hidden" name="song_id" value="{{ songs[i].id }}">
